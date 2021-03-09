@@ -22,6 +22,7 @@ public class ClientUI extends JPanel implements ActionListener{
 	private User user;
 	private ImageIcon profileImage, img;
 	private ArrayList<User> reciverList = new ArrayList<User>();
+	private static Contacts contacts;
 
 	private JPanel panelNorth = new JPanel();
 	private JPanel panelSouthCenter = new JPanel();
@@ -51,6 +52,7 @@ public class ClientUI extends JPanel implements ActionListener{
 	 * This method constructs the ClientUI.
 	 */
 	public ClientUI() {
+		contacts = new Contacts(this);
 		connect(false);
 		handleActionListeners();
 		setLayout();
@@ -202,6 +204,8 @@ public class ClientUI extends JPanel implements ActionListener{
 	 * 
 	 * @param reciverList the reciverlist 
 	 */
+
+	//Sets reciever for the message
 	public void setReciverList(ArrayList<User> reciverList) {
 		for(User u : reciverList) {
 			this.reciverList.add(u);
@@ -233,6 +237,15 @@ public class ClientUI extends JPanel implements ActionListener{
 			img = resizeImage(path, image);
 		}
 		return img;
+	}
+
+	/**
+	 * @return This method returns the Contacts object after
+	 *  the users have been displayed by the client class.
+	 */
+
+	public static Contacts getContacts() {
+		return contacts;
 	}
 
 	/**
@@ -290,13 +303,20 @@ public class ClientUI extends JPanel implements ActionListener{
 		}
 
 		if(e.getSource()==btnDisconnect) {
+			try {
+				contacts.writeContacts();
+			}
+			catch(IOException e1) {
+
+			}
+			contacts.clearContactList();
 			client.logout();
 			connect(false);
 		}
 
-		//Needs to add Contacts frame.
 		if(e.getSource() == btnContacts) {
 			client.clearUserlist();
+			contacts.createFrame();
 		}
 	}
 

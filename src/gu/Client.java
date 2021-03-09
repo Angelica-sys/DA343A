@@ -127,7 +127,9 @@ public class Client  {
 					Object obj = ois.readObject();
 					if(obj instanceof User) {
 						users.add((User)obj);
+						ClientUI.getContacts().displayUsers(users);
 					}
+					//Skickar meddelande
 					else if(obj instanceof Message) {
 						clientUI.append((Message)obj);
 					}
@@ -136,6 +138,7 @@ public class Client  {
 						else {
 							clientUI.append((String)obj);						
 							if(((String)obj).contains("is taken")) clientUI.connect(false);
+							if(((String)obj).contains("You connected to the server")) clientUI.getContacts().readContacts();
 						}
 					}
 				}

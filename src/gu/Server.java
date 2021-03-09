@@ -22,6 +22,7 @@ public class Server {
 	private int port;
 	private boolean running;
 	private HashMap<String, ClientHandler> clients;
+	private UnsentMessage unsentMessages = new UnsentMessage(Message.MESSAGE);
 	private static int uniqueId;
 
 	/**
@@ -115,10 +116,12 @@ public class Server {
 			if(clients.containsKey(user.getUsername()) && !user.getUsername().isEmpty()) {
 				ClientHandler cHandler = clients.get(user.getUsername());
 				if(!cHandler.socket.isClosed()) {
+					//If send message fails send message to UnsetMessage instead and send it next time user logs on.
 					cHandler.sendMessage(message);
 				}
-				else { 
-					//
+				else {
+					//Adds message to unsentMessages if it fails to send.
+					unsentMessages.put(user.getUsername(), message);
 				}
 			}
 		}
@@ -298,6 +301,19 @@ public class Server {
 				display("Error sending message to " + user.getUsername()+ "\n" +e.toString());
 			}
 		}
+
+		private synchronized void sendUnsentMessages() throws IOException, InterruptedException {
+			ArrayList<Message> unsent = unsentMessages.get(user.getUsername());
+			if (unsent != null && unsent.size() != 0) {
+				for (Message message : unsent) {
+					ArrayList<User> list = new ArrayList<User>();
+					list.add(user);
+					message.setReciverList(list);
+					sendMessage(message);
+				}
+				unsentMessages.remove(user.getUsername());
+			}
+		}
 		
 		private synchronized void connectUser() throws IOException, InterruptedException {
 			if(userExists(user)) {
@@ -313,6 +329,8 @@ public class Server {
 				//Displays this message in the Server Log on the Server UI.
 				display(user.getUsername()+" just connected.");
 				serverUI.appendUsers(user.getUsername());
+				//Sends the unsent messages after user reconnects.
+				sendUnsentMessages();
 			}
 		}
 		
