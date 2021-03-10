@@ -1,9 +1,8 @@
-package Client.View.Login;
+package View.Login;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
-import java.io.File;
 
 public class LoginPanel extends JPanel {
     private JLabel nameLabel;

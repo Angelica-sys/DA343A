@@ -1,19 +1,16 @@
-package Client.Controller;
+package Controller;
 
-import Client.Model.Message;
-import Client.Model.User;
-import Client.View.Login.LoginFrame;
-import Client.View.MainView;
+import Model.Message;
+import Model.User;
+import View.MainView;
 
 import javax.swing.*;
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
 import java.io.*;
-import java.net.ServerSocket;
 import java.net.Socket;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
-import java.util.HashMap;
 
 /**
  * Controller for the client side with inner Thread receiving message objects

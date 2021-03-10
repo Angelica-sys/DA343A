@@ -1,7 +1,7 @@
-package Client.View;
+package View;
 
-import Client.Controller.ClientController;
-import Client.View.Login.LoginFrame;
+import Controller.ClientController;
+import View.Login.LoginFrame;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;

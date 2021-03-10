@@ -1,6 +1,6 @@
-package Client.View.Login;
+package View.Login;
 
-import Client.Controller.ClientController;
+import Controller.ClientController;
 
 import javax.swing.*;
 import java.awt.*;

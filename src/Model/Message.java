@@ -1,9 +1,7 @@
-package Client.Model;
+package Model;
 import javax.swing.*;
 import java.io.Serializable;
-import java.sql.Time;
 import java.text.SimpleDateFormat;
-import java.time.LocalDateTime;
 import java.util.Date;
 
 /**
@@ -47,7 +45,7 @@ public class Message implements Serializable {
         this.alias = new ImageIcon("images/alias.png");
     }
     public Message(String text, String sender, ImageIcon alias, Object[] recipients, ImageIcon image) {
-        this(text, sender, alias, recipients);
+        //this(text, sender, alias, recipients);
         this.image = image;
     }
 
