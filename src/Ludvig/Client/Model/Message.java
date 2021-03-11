@@ -1,9 +1,12 @@
 package Client.Model;
+import Ludvig.Client.Model.User;
+
 import javax.swing.*;
 import java.io.Serializable;
 import java.sql.Time;
 import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.Date;
 
 /**
@@ -15,40 +18,48 @@ import java.util.Date;
 public class Message implements Serializable {
     private String text;
     private String sender;
-    private Object[] recievers; 
+    private Object[] recievers;
+    private ArrayList<User> receivers;
     private ImageIcon image; 
     private String timeMessageRecievedByServer;
     private String timeMessageReceivedClient;
     private Boolean isOffLineMessage; 
-    private int recieversCount; 
+    private int receiversCount;
     private ImageIcon alias;
+    private int logout = 0;
 
     /**
      * This constructer Constructs a message without an image.
      * @param text text in message
      * @param sender sender of message
-     * @param recievers reciver or recievers of message
+     * @param receivers receiver or receivers of message
      */
     
-    public Message (String text, String sender, Object[] recievers)
+    public Message (String text, String sender, ArrayList<User> receivers)
     {
         this.isOffLineMessage = false; 
         this.text = text;
-        this.recievers =recievers; 
+        this.receivers = receivers;
         this.sender = sender; 
-        this.recieversCount = recievers.length; 
+        this.receiversCount = receivers.size();
         this.alias = new ImageIcon("images/alias.png"); 
     }
     
-    public Message (String text, String sender, Object[] recievers, ImageIcon image)
+    public Message (String text, String sender, ArrayList<User> receivers, ImageIcon image)
     {
-        this(text, sender, recievers);
+        this(text, sender, receivers);
         this.image =image; 
         this.alias = new ImageIcon("images/alias.png");
     }
-    public Message(String text, String sender, ImageIcon alias, Object[] recipients, ImageIcon image) {
+    /*public Message(String text, String sender, ImageIcon alias, Object[] recipients, ImageIcon image) {
         this(text, sender, alias, recipients);
         this.image = image;
+    }*/
+
+    public Message(int logout, String sender){
+        // Får bara in en 1a när disconnect körs, får hanteras på server sidan för att stänga koppling / tråd
+        this.logout = logout;
+        this.sender = sender;
     }
 
     public ImageIcon getImage() {
@@ -60,11 +71,11 @@ public class Message implements Serializable {
     }
 
     public int getRecCount() {
-        return this.recieversCount;
+        return this.receiversCount;
     }
 
     public void lowerRecCount() {
-        --this.recieversCount;
+        --this.receiversCount;
     }
 
     public void setTimeRecievedByServer() {

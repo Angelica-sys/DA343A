@@ -1,22 +1,22 @@
-package Client.Controller;
+package Ludvig.Client.Controller;
 
 import Client.Model.Message;
-import Client.Model.User;
-import Client.View.Login.LoginFrame;
-import Client.View.MainView;
+import Ludvig.Client.Model.User;
+import Ludvig.Client.View.Login.LoginFrame;
+import Ludvig.Client.View.MainView;
 
 import javax.swing.*;
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
 import java.io.*;
-import java.net.ServerSocket;
 import java.net.Socket;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
-import java.util.HashMap;
 
 /**
  * Controller for the client side with inner Thread receiving message objects
+ * @Version 1.0
+ * @Author Ludvig Wedin Pettersson
  */
 public class ClientController {
     private MainView view;
@@ -51,12 +51,11 @@ public class ClientController {
      * @param name String of name
      * @param path String of filepath
      */
-    public void connect(String name, String path){
+    public Boolean connect(String name, String path){
         try {
             socket = new Socket(ip, port);
             ImageIcon icon = new ImageIcon(path);
             user = new User(name,icon);
-
             try {
                 oos = new ObjectOutputStream(socket.getOutputStream());
                 ois = new ObjectInputStream(socket.getInputStream());
@@ -66,17 +65,40 @@ public class ClientController {
                     receiverThread.start();
                 }
                 System.out.println("Klient uppkopplad");
-            } catch (IOException e) {}
-        } catch(Exception e){}
+            } catch (IOException e) {
+                return false;
+            }
+        } catch(Exception e){
+            return false;
+        }
+        view.enableDisableButtons(true);
+        return true;
     }
 
     /**
-     * Puts Message object from parameter into the stream.
-     * @param message Message object.
+     * Tries to sign off and disconnect from the server.
      */
-    public synchronized void sendMessage(Message message){
+    public void disconnect(){
         try {
-            oos.writeObject(message);
+            oos.writeObject(new Message(1, user.getName())); // skicka meddelande så att tråd stängs på server
+            if(ois != null) ois.close();
+            if(oos != null) oos.close();
+            if(socket != null) socket.close();
+        }
+        catch(Exception e) {}
+        view.enableDisableButtons(false);
+    }
+
+    /**
+     * Creates Message object from parameters and puts into the stream.
+     * @param text The text that is to be sent
+     * @param receivers List of receivers
+     * @param image Image file to be sent
+     */
+    public synchronized void sendMessage(String text, ArrayList<User> receivers, ImageIcon image){
+        Message newMessage = new Message(text, user.getName(), receivers, image);
+        try {
+            oos.writeObject(newMessage);
             oos.flush();
         } catch (IOException e) {
             e.printStackTrace();
@@ -122,18 +144,11 @@ public class ClientController {
         return list;
     }
 
-    /**
-     * Tries to sign off and disconnect from the server.
-     */
-    public void disconnect(){
-        try {
-            //oos.writeObject(); skicka meddelande så att tråd stängs på server
-            if(ois != null) ois.close();
-            if(oos != null) oos.close();
-            if(socket != null) socket.close();
-        }
-        catch(Exception e) {}
+    public ArrayList<User> getOnlineUsers() {
+        return onlineUsers;
     }
+
+
 
     /**
      * Adds a listener to the class

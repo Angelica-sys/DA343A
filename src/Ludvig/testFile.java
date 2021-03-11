@@ -1,3 +1,4 @@
+package Ludvig;
 import javax.swing.*;
 import java.io.File;
 

@@ -135,7 +135,8 @@ public class Message implements Serializable {
 		return true;		
 	}
 	/**
-	 * @param set a receiver to the list of receivers 
+	 * @param user set a receiver to the list of receivers
+	 *
 	 */
 	public void addReciver(User user) {
 		reciverList.add(user);

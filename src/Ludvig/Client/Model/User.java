@@ -1,4 +1,4 @@
-package Client.Model;
+package Ludvig.Client.Model;
 
 import javax.swing.*;
 import java.io.Serializable;

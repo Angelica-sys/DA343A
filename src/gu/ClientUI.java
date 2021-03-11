@@ -270,7 +270,7 @@ public class ClientUI extends JPanel implements ActionListener{
 			System.out.println(username + " has connected to the server.");
 			if(!username.isEmpty() && profileImage!= null) {
 				user = new User(username, profileImage);
-				client = new Client("25.30.158.101", port, user, this);
+				client = new Client(ipAdress, port, user, this);
 				if(!client.start()) return;
 				connect(true);
 			}

@@ -1,4 +1,4 @@
-package Client.View.Login;
+package Ludvig.bort;
 
 import javax.swing.*;
 import java.awt.*;
@@ -46,6 +46,7 @@ public class LoginPanel extends JPanel {
             chooser.showOpenDialog(null);
             str = chooser.getSelectedFile().getAbsolutePath();
             System.out.println(str);
+
         }
     }
 }
