@@ -10,6 +10,11 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.io.File;
 
+/**
+ * Panel holding buttons and textfield for outgoing messages
+ * @Version 1.0
+ * @Author Ludvig Wedin Pettersson
+ */
 public class SouthPanel extends JPanel {
     private ClientController controller;
     private MainView view;
@@ -17,6 +22,11 @@ public class SouthPanel extends JPanel {
     private SouthCenter southCenter;
     private SouthSouth southSouth;
 
+    /**
+     * Constructs panel
+     * @param view MainView
+     * @param controller ClientController
+     */
     public SouthPanel(MainView view, ClientController controller){
         this.view = view;
         this.controller = controller;
@@ -27,6 +37,10 @@ public class SouthPanel extends JPanel {
         add(southSouth, BorderLayout.SOUTH);
     }
 
+    /**
+     * Enables or disables buttons depending on incoming parameter
+     * @param connected Boolean
+     */
     public void enableDisableButtons(Boolean connected) {
         southSouth.attachPicture.setEnabled(connected);
         southSouth.sendMessage.setEnabled(connected);
@@ -34,10 +48,16 @@ public class SouthPanel extends JPanel {
     }
 
 
+    /**
+     * Inner class representing a panel
+     */
     public class SouthSouth extends JPanel{
         private JButton attachPicture;
         private JButton sendMessage;
 
+        /**
+         * Constructing panel
+         */
         public SouthSouth(){
             attachPicture = new JButton("Select picture");
             attachPicture.addActionListener(this::actionPerformed);
@@ -48,6 +68,10 @@ public class SouthPanel extends JPanel {
             add(sendMessage);
         }
 
+        /**
+         * Method used to select a picture for a message
+         * @return String with filepath
+         */
         public String selectPicture(){
             String path = "";
             JFileChooser chooser = new JFileChooser();
@@ -60,6 +84,10 @@ public class SouthPanel extends JPanel {
             return path;
         }
 
+        /**
+         * Listens to registered ActionListeners
+         * @param e Source of call
+         */
         public void actionPerformed(ActionEvent e){
             if (e.getSource() == sendMessage){
                 if (view.getReceiverList().isEmpty()){
@@ -74,6 +102,9 @@ public class SouthPanel extends JPanel {
         }
     }
 
+    /**
+     * Panel holding textfield where user enters text for outgoing message
+     */
     public class SouthCenter extends JPanel{
         private JTextField messageField;
 

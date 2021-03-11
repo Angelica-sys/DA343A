@@ -15,7 +15,7 @@ import java.util.ArrayList;
 
 /**
  * Class handling saved and currently online contacts. Allows saving contacts and selection of receivers of next sent message.
- * @Version 1.0
+ * @Version 1.1
  * @Author Ludvig Wedin Pettersson
  */
 
