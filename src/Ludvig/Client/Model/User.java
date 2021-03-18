@@ -27,4 +27,8 @@ public class User implements Serializable {
     public String getName() {
         return name;
     }
+
+    public ImageIcon getIcon(){
+        return icon;
+    }
 }
