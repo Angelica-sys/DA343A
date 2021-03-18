@@ -36,7 +36,7 @@ public class CenterPanel extends JPanel {
         if(message instanceof Message) {
             Message m = (Message) message;
             listModel.addElement(m.getImage());
-            listModel.addElement(m.getText()+ " sent from " + m.getSender());
+            listModel.addElement(m.getText()+ " sent from " + m.getSender() + " Time received: " + m.getTimeMessageReceivedClient() );
         }
 
         else {
