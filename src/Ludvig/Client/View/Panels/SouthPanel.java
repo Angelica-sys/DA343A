@@ -2,13 +2,11 @@ package Ludvig.Client.View.Panels;
 
 import Ludvig.Client.Controller.ClientController;
 import Ludvig.Client.View.MainView;
-import Ludvig.Main;
 
 import javax.swing.*;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import java.awt.*;
 import java.awt.event.ActionEvent;
-import java.io.File;
 
 /**
  * Panel holding buttons and textfield for outgoing messages

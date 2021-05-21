@@ -1,6 +1,7 @@
 package Ludvig.Server.server;
 
 import Ludvig.Server.controller.ClientListenerInterface;
+import Ludvig.Server.model.User;
 
 import java.io.IOException;
 import java.io.ObjectInputStream;
@@ -121,6 +122,7 @@ public class ClientHandler {
          * If so then they are sent through the callback-object listener
          */
         public void run(){
+            System.out.println("Lyssnar på klient");
             try {
                 ois = new ObjectInputStream(socket.getInputStream());
                 o = ois.readObject();
@@ -130,15 +132,21 @@ public class ClientHandler {
 
             listener.sendUser(o, ClientHandler.this);
             while(!Thread.interrupted()){
+                System.out.println("SNURRAR");
                 try{
                     o = ois.readObject();
-                    listener.sendMessage(o);
+                    if (o instanceof Ludvig.Client.Model.User){
+                        System.out.println("USER MOTTAGEN");
+                    } else if (o instanceof  Ludvig.Client.Model.Message){
+                        listener.sendMessage(o);
+                    }
                 } catch (IOException e) {
                     closeClient();
-                } catch (ClassNotFoundException e) {
+                } catch (Exception e) {
                     e.printStackTrace();
                 }
             }
+            System.out.println("STÄNGER TRÅD");
         }
     }
 }

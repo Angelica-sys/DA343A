@@ -59,15 +59,19 @@ public class ClientController {
                 oos = new ObjectOutputStream(socket.getOutputStream());
                 ois = new ObjectInputStream(socket.getInputStream());
                 oos.writeObject(user);
+                oos.flush();
+                oos.writeObject(user);
+                oos.flush();
                 if (receiverThread == null){
                     receiverThread = new Receiver();
                     receiverThread.start();
-                }
-                System.out.println("Klient uppkopplad");
+                } System.out.println("Klient uppkopplad");
             } catch (IOException e) {
+                e.printStackTrace();
                 return false;
             }
         } catch(Exception e){
+            e.printStackTrace();
             return false;
         }
         view.enableDisableButtons(true);
@@ -97,10 +101,11 @@ public class ClientController {
      * @param image Image file to be sent
      */
     public synchronized void sendMessage(String text, ArrayList<User> receivers, ImageIcon image){
-        Message newMessage = new Message(text, user.getUsername(), receivers, image);
         try {
+            Message newMessage = new Message(text, user.getUsername(), receivers, image);
             oos.writeObject(newMessage);
             oos.flush();
+            System.out.println("Meddelande skickat");
         } catch (IOException e) {
             e.printStackTrace();
         }
