@@ -1,6 +1,6 @@
 package Ludvig.Client.View;
 
-import Client.Model.Message;
+import Ludvig.Client.Model.Message;
 import Ludvig.Client.Controller.ClientController;
 import Ludvig.Client.Model.User;
 import Ludvig.Client.View.Panels.CenterPanel;

@@ -1,6 +1,5 @@
 package Ludvig.Client.Controller;
-
-import Client.Model.Message;
+import Ludvig.Client.Model.Message;
 import Ludvig.Client.Model.User;
 import Ludvig.Client.View.Login.LoginFrame;
 import Ludvig.Client.View.MainView;

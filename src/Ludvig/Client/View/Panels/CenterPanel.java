@@ -1,7 +1,7 @@
 package Ludvig.Client.View.Panels;
 
 import Ludvig.Client.Controller.ClientController;
-import Client.Model.Message;
+import Ludvig.Client.Model.Message;
 
 import javax.swing.*;
 import java.awt.*;

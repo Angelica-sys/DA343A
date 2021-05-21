@@ -49,10 +49,6 @@ public class Message implements Serializable {
         this.image =image; 
         this.alias = new ImageIcon("images/alias.png");
     }
-    /*public Message(String text, String sender, ImageIcon alias, Object[] recipients, ImageIcon image) {
-        this(text, sender, alias, recipients);
-        this.image = image;
-    }*/
 
     public Message(int logout, String sender){
         // Får bara in en 1a när disconnect körs, får hanteras på server sidan för att stänga koppling / tråd
