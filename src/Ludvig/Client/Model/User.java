@@ -5,6 +5,8 @@ import java.io.Serializable;
 
 /**
  * Class representing a user in the system
+ * @Version 1.0
+ * @Author Ludvig Wedin Pettersson
  */
 public class User implements Serializable {
     private String name;

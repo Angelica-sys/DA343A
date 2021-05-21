@@ -10,6 +10,8 @@ import java.awt.event.ActionEvent;
 
 /**
  * Top panel that holds a selection of buttons
+ * @Version 1.0
+ * @Author Ludvig Wedin Pettersson
  */
 public class NorthPanel extends JPanel {
     private JButton contacts;
