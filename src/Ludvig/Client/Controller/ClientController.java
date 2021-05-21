@@ -81,7 +81,7 @@ public class ClientController {
      */
     public void disconnect(){
         try {
-            oos.writeObject(new Message(1, user.getName())); // skicka meddelande så att tråd stängs på server
+            oos.writeObject(new Message(1, user.getUsername())); // skicka meddelande så att tråd stängs på server
             if(ois != null) ois.close();
             if(oos != null) oos.close();
             if(socket != null) socket.close();
@@ -97,7 +97,7 @@ public class ClientController {
      * @param image Image file to be sent
      */
     public synchronized void sendMessage(String text, ArrayList<User> receivers, ImageIcon image){
-        Message newMessage = new Message(text, user.getName(), receivers, image);
+        Message newMessage = new Message(text, user.getUsername(), receivers, image);
         try {
             oos.writeObject(newMessage);
             oos.flush();
@@ -140,7 +140,7 @@ public class ClientController {
         }
         for (User i: list
         ) {
-            System.out.println(i.getName());
+            System.out.println(i.getUsername());
         }
         return list;
     }

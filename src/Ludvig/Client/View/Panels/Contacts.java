@@ -107,10 +107,10 @@ public class Contacts extends JFrame implements ActionListener, PropertyChangeLi
         onlineUserList = controller.getOnlineUsers();
         for (User user : savedUserList){
             allUsers.add(user);
-            savedListModel.addElement(user.getName());
+            savedListModel.addElement(user.getUsername());
         } for (User user : onlineUserList){
             allUsers.add(user);
-            onlineListModel.addElement(user.getName());
+            onlineListModel.addElement(user.getUsername());
         }
     }
 
@@ -124,7 +124,7 @@ public class Contacts extends JFrame implements ActionListener, PropertyChangeLi
         for (int i = 0; i < selectedIx.length; i++) {
             Object o = onlineList.getModel().getElementAt(selectedIx[i]);
             for(User u : onlineUserList) {
-                if(o.equals(u.getName()))
+                if(o.equals(u.getUsername()))
                     selectedUsers.add(u);
             }
         }
@@ -133,7 +133,7 @@ public class Contacts extends JFrame implements ActionListener, PropertyChangeLi
         for (int i = 0; i < selectedIx.length; i++){
             Object o = savedList.getModel().getElementAt(selectedIx[i]);
             for (User u : savedUserList){
-                if (o.equals(u.getName())){
+                if (o.equals(u.getUsername())){
                     selectedUsers.add(u);
                 }
             }
@@ -150,7 +150,7 @@ public class Contacts extends JFrame implements ActionListener, PropertyChangeLi
         for (int i = 0; i < selUsers.length; i++){
             Object o = onlineList.getModel().getElementAt(selUsers[i]);
             for (User u : onlineUserList){
-                if (o.equals(u.getName())){
+                if (o.equals(u.getUsername())){
                     if (checkIfDuplicate(u)){
                         break;
                     } else {
@@ -169,7 +169,7 @@ public class Contacts extends JFrame implements ActionListener, PropertyChangeLi
      */
     public Boolean checkIfDuplicate(User u){
         for (User user : savedUserList){
-            if (u.getName().equals(user.getName())){
+            if (u.getUsername().equals(user.getUsername())){
                 return true;
             }
         }
