@@ -71,6 +71,8 @@ public class ClientController {
             return false;
         }
         view.enableDisableButtons(true);
+        //Message s = new Message("MEDDELANDE", "JAG", null);   TESTAR SÅ MEDDELANDE FUNKAR
+        //pcs.firePropertyChange("Message", null, s);           TESTAR SÅ MEDDELANDE FUNKAR
         return true;
     }
 

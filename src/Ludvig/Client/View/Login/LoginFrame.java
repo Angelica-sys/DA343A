@@ -30,12 +30,6 @@ public class LoginFrame extends JFrame {
         setVisible(true);
     }
 
-    /**
-     * Method closing the window
-     */
-    public void closeWindow(){
-        dispose();
-    }
 
     /**
      * Inner class, panel object that is used by the frame
@@ -85,7 +79,7 @@ public class LoginFrame extends JFrame {
                     JOptionPane.showMessageDialog(null, "Username and picture must be selected", "Error", JOptionPane.WARNING_MESSAGE);
                 }else {
                     if (controller.connect(name, str)){
-                        closeWindow();
+                        dispose();
                     }else {
                         JOptionPane.showMessageDialog(null, "Couldn't connect, try again", "Error", JOptionPane.WARNING_MESSAGE);
                     }
