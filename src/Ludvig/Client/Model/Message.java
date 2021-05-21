@@ -1,5 +1,4 @@
-package Client.Model;
-import Ludvig.Client.Model.User;
+package Ludvig.Client.Model;
 
 import javax.swing.*;
 import java.io.Serializable;
@@ -11,14 +10,13 @@ import java.util.Date;
 
 /**
  * This Message class keeps track of where a massage comes 
- * from and where it is delivered, it transforms the data reciveved from a sender to a message desplayed in the chat window.
+ * from and where it is delivered, it transforms the data received from a sender to a message displayed in the chat window.
  * @version 1.0
  * @author Angelica Asplund
  */
 public class Message implements Serializable {
     private String text;
     private String sender;
-    private Object[] recievers;
     private ArrayList<User> receivers;
     private ImageIcon image; 
     private String timeMessageRecievedByServer;
@@ -94,27 +92,12 @@ public class Message implements Serializable {
         return this.sender;
     }
 
-    public Object[] getRecipients() {
-        return this.recievers;
-    }
-
     public String getTimeMessageReceivedClient(){
         return timeMessageReceivedClient;
     }
 
     public void setTimeMessageReceivedClient(String time){
         timeMessageReceivedClient = time;
-    }
-
-
-    public String getRecipientsToString() {
-        String res = this.recievers[0].toString();
-        if (this.recievers.length > 1) {
-            for(int i = 1; i < this.recievers.length; ++i) {
-                res = res + ", " + this.recievers[i];
-            }
-        }
-        return res;
     }
 
     public void setIsOfflineMessage(Boolean isOfflineMessage) {
