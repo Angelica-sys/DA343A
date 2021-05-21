@@ -25,6 +25,7 @@ public class Gui extends JFrame implements ActionListener {
     private Date date = new Date();
 
     public Gui(InetAddress ip, int port){
+        setDefaultCloseOperation(EXIT_ON_CLOSE);
         System.out.println(ip + " : " + port);
         setPreferredSize(new Dimension(600,600));
         setLayout(new BorderLayout());
@@ -47,7 +48,6 @@ public class Gui extends JFrame implements ActionListener {
         setLocationByPlatform(true);
         pack();
         setVisible(true);
-        setDefaultCloseOperation(HIDE_ON_CLOSE);
     }
 
     public void createNorthPanels(){
