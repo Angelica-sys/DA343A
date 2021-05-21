@@ -12,7 +12,7 @@ import java.util.Date;
  * This Message class keeps track of where a massage comes 
  * from and where it is delivered, it transforms the data received from a sender to a message displayed in the chat window.
  * @version 1.0
- * @author Angelica Asplund
+ * @author Angelica Asplund, Ludvig Wedin Pettersson
  */
 public class Message implements Serializable {
     private String text;
@@ -27,7 +27,7 @@ public class Message implements Serializable {
     private int logout = 0;
 
     /**
-     * This constructer Constructs a message without an image.
+     * This constructor Constructs a message without an image.
      * @param text text in message
      * @param sender sender of message
      * @param receivers receiver or receivers of message
