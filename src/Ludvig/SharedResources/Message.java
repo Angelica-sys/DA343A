@@ -1,10 +1,8 @@
-package Ludvig.Client.Model;
+package Ludvig.SharedResources;
 
 import javax.swing.*;
 import java.io.Serializable;
-import java.sql.Time;
 import java.text.SimpleDateFormat;
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Date;
 

@@ -1,7 +1,6 @@
 package Ludvig.Client.Controller;
-import Ludvig.Client.Model.Message;
-import Ludvig.Client.Model.User;
-import Ludvig.Client.View.Login.LoginFrame;
+import Ludvig.SharedResources.Message;
+import Ludvig.SharedResources.User;
 import Ludvig.Client.View.MainView;
 
 import javax.swing.*;

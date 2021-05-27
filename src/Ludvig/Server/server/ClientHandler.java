@@ -1,7 +1,8 @@
 package Ludvig.Server.server;
 
 import Ludvig.Server.controller.ClientListenerInterface;
-import Ludvig.Server.model.User;
+import Ludvig.SharedResources.Message;
+import Ludvig.SharedResources.User;
 
 import java.io.IOException;
 import java.io.ObjectInputStream;
@@ -135,10 +136,10 @@ public class ClientHandler {
                 System.out.println("SNURRAR");
                 try{
                     o = ois.readObject();
-                    if (o instanceof Ludvig.Client.Model.User){
+                    if (o instanceof User){
                         System.out.println("USER MOTTAGEN");
 
-                    } else if (o instanceof  Ludvig.Client.Model.Message){
+                    } else if (o instanceof Message){
                         listener.sendMessage(o);
                     }
                 } catch (IOException e) {

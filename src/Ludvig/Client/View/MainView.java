@@ -1,8 +1,8 @@
 package Ludvig.Client.View;
 
-import Ludvig.Client.Model.Message;
+import Ludvig.SharedResources.Message;
 import Ludvig.Client.Controller.ClientController;
-import Ludvig.Client.Model.User;
+import Ludvig.SharedResources.User;
 import Ludvig.Client.View.Panels.CenterPanel;
 import Ludvig.Client.View.Panels.NorthPanel;
 import Ludvig.Client.View.Panels.SouthPanel;

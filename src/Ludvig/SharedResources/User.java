@@ -1,4 +1,4 @@
-package Ludvig.Client.Model;
+package Ludvig.SharedResources;
 
 import javax.swing.*;
 import java.io.Serializable;

@@ -1,7 +1,7 @@
 package Ludvig.Client.View.Panels;
 
 import Ludvig.Client.Controller.ClientController;
-import Ludvig.Client.Model.User;
+import Ludvig.SharedResources.User;
 import Ludvig.Client.View.MainView;
 
 
