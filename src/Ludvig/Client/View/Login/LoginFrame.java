@@ -87,7 +87,7 @@ public class LoginFrame extends JFrame {
 
             } else if (e.getSource() == selectPic){
                 if (chooser == null){
-                    chooser = new JFileChooser();
+                    chooser = new JFileChooser("files");
                 }
                 chooser.showOpenDialog(null);
                 str = chooser.getSelectedFile().getAbsolutePath();
