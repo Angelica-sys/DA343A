@@ -84,7 +84,7 @@ public class ClientController {
      */
     public void disconnect(){
         try {
-            oos.writeObject(new Message(1, user.getUsername())); // skicka meddelande så att tråd stängs på server
+            oos.writeObject(new Message(1, user)); // skicka meddelande så att tråd stängs på server
             if(ois != null) ois.close();
             if(oos != null) oos.close();
             if(socket != null) socket.close();
@@ -101,7 +101,7 @@ public class ClientController {
      */
     public synchronized void sendMessage(String text, ArrayList<User> receivers, ImageIcon image){
         try {
-            Message newMessage = new Message(text, user.getUsername(), receivers, image);
+            Message newMessage = new Message(text, user, receivers, image);
             oos.writeObject(newMessage);
             oos.flush();
             System.out.println("Meddelande skickat");

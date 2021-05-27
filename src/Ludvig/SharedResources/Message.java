@@ -13,15 +13,12 @@ import java.util.Date;
  * @author Angelica Asplund, Ludvig Wedin Pettersson
  */
 public class Message implements Serializable {
+    private User sender;
     private String text;
-    private String sender;
     private ArrayList<User> receivers;
     private ImageIcon image; 
     private String timeMessageRecievedByServer;
     private String timeMessageReceivedClient;
-    private Boolean isOffLineMessage; 
-    private int receiversCount;
-    private ImageIcon alias;
     private int logout = 0;
 
     /**
@@ -31,24 +28,20 @@ public class Message implements Serializable {
      * @param receivers receiver or receivers of message
      */
     
-    public Message (String text, String sender, ArrayList<User> receivers)
+    public Message (String text, User sender, ArrayList<User> receivers)
     {
-        this.isOffLineMessage = false; 
         this.text = text;
         this.receivers = receivers;
-        this.sender = sender; 
-        this.receiversCount = receivers.size();
-        this.alias = new ImageIcon("images/alias.png"); 
+        this.sender = sender;
     }
     
-    public Message (String text, String sender, ArrayList<User> receivers, ImageIcon image)
+    public Message (String text, User sender, ArrayList<User> receivers, ImageIcon image)
     {
         this(text, sender, receivers);
-        this.image =image; 
-        this.alias = new ImageIcon("images/alias.png");
+        this.image =image;
     }
 
-    public Message(int logout, String sender){
+    public Message(int logout, User sender){
         // Får bara in en 1a när disconnect körs, får hanteras på server sidan för att stänga koppling / tråd
         this.logout = logout;
         this.sender = sender;
@@ -56,18 +49,6 @@ public class Message implements Serializable {
 
     public ImageIcon getImage() {
         return this.image;
-    }
-
-    public ImageIcon getAlias() {
-        return this.alias;
-    }
-
-    public int getRecCount() {
-        return this.receiversCount;
-    }
-
-    public void lowerRecCount() {
-        --this.receiversCount;
     }
 
     public void setTimeRecievedByServer() {
@@ -82,7 +63,7 @@ public class Message implements Serializable {
         return this.text;
     }
 
-    public String getSender() {
+    public User getSender() {
         return this.sender;
     }
 
@@ -94,22 +75,7 @@ public class Message implements Serializable {
         timeMessageReceivedClient = time;
     }
 
-    public void setIsOfflineMessage(Boolean isOfflineMessage) {
-        this.isOffLineMessage = isOfflineMessage;
-    }
-
-    public boolean getIsOfflineMessage() {
-        return this.isOffLineMessage;
-    }
-
     public String toString() {
-        String var10000;
-        if (!this.isOffLineMessage) {
-            var10000 = this.timeDeliveredtoClient();
-            return var10000 + " - " + this.sender + " says: " + this.text;
-        } else {
-            var10000 = this.timeDeliveredtoClient();
-            return var10000 + " - " + this.sender + " said (" + timeMessageRecievedByServer + "): " + this.text;
-        }
+        return null;
     }
 }
