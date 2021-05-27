@@ -179,10 +179,4 @@ public class Controller {
             writeToLog("Removed client " + client);
         }
     }
-
-
-  public static void main(String[] args) {
-      Controller controller = new Controller(55234);
-  }
-
 }
