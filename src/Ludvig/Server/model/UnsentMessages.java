@@ -1,5 +1,6 @@
 package Ludvig.Server.model;
-
+import Ludvig.SharedResources.User;
+import Ludvig.SharedResources.Message;
 import java.util.ArrayList;
 import java.util.HashMap;
 

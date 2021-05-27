@@ -4,7 +4,8 @@ import Ludvig.Server.server.ClientHandler;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
-
+import Ludvig.SharedResources.User;
+import Ludvig.SharedResources.Message;
 /**
  * OnlineClients is a synchronized HashMap containing the online users and their respective ClientHandlers
  * @version 1.0

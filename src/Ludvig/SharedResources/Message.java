@@ -52,7 +52,7 @@ public class Message implements Serializable {
     }
 
     public void setTimeRecievedByServer() {
-        this.timeMessageRecievedByServer = (new SimpleDateFormat("HH:mm")).format(new Date());
+        // Mottagen tid server
     }
 
     public String timeDeliveredtoClient() {
@@ -77,5 +77,9 @@ public class Message implements Serializable {
 
     public String toString() {
         return null;
+    }
+
+    public ArrayList<User> getReceivers() {
+        return receivers;
     }
 }

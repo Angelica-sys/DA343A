@@ -1,9 +1,7 @@
 package Ludvig.Server.controller;
 
-import Ludvig.Server.model.Message;
 import Ludvig.Server.model.OnlineClients;
 import Ludvig.Server.model.UnsentMessages;
-import Ludvig.Server.model.User;
 import Ludvig.Server.server.ClientHandler;
 import Ludvig.Server.server.Server;
 import Ludvig.Server.view.Gui;
@@ -12,6 +10,8 @@ import java.net.InetAddress;
 import java.net.UnknownHostException;
 import java.util.ArrayList;
 import java.util.Date;
+import Ludvig.SharedResources.User;
+import Ludvig.SharedResources.Message;
 
 /**
  * Controller is the class that handles all the logical functions of the program
@@ -82,9 +82,9 @@ public class Controller {
      * @param message The message that server received and need to send forward
      */
     public void sendMessage(Message message){
-        for (User user : message.getToUser()) {
+        for (User user : message.getReceivers()) {
             if (clients.findUser(user)) {
-                message.setTimeReceived(new Date().toString());
+                message.setTimeRecievedByServer();
                 clients.get(user).sendObject("message");
                 clients.get(user).sendObject(message);
                 writeToLog("Sent message");
@@ -164,7 +164,6 @@ public class Controller {
         @Override
         public void sendMessage(Object o) {
             Message message = (Message)o;
-            message.setTimeSent(new Date().toString());
             Controller.this.sendMessage(message);
             writeToLog("Sent message");
         }
