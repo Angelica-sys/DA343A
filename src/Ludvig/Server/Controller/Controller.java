@@ -94,7 +94,7 @@ public class Controller {
         {
             if (clients.findUser(user))
             {
-                message.setTimeRecievedByServer();
+                message.setTimeReceivedByServer();
                 clients.get(user).sendObject(message);
                 writeToLog("Sent message");
             }

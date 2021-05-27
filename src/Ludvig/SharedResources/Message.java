@@ -17,7 +17,7 @@ public class Message implements Serializable {
     private String text;
     private ArrayList<User> receivers;
     private ImageIcon image; 
-    private String timeMessageRecievedByServer;
+    private String timeMessageReceivedByServer;
     private String timeMessageReceivedClient;
     private int logout = 0;
 
@@ -27,20 +27,31 @@ public class Message implements Serializable {
      * @param sender sender of message
      * @param receivers receiver or receivers of message
      */
-    
     public Message (String text, User sender, ArrayList<User> receivers)
     {
         this.text = text;
         this.receivers = receivers;
         this.sender = sender;
     }
-    
+
+    /**
+     * Constructor used when sending a message with both text and image.
+     * @param text of the message.
+     * @param sender of the message.
+     * @param receivers of the message.
+     * @param image to send with the message.
+     */
     public Message (String text, User sender, ArrayList<User> receivers, ImageIcon image)
     {
         this(text, sender, receivers);
         this.image =image;
     }
 
+    /**
+     * Constructor used when a client is logging out.
+     * @param logout value used to tell the server that the client wants to log out.
+     * @param sender of the message.
+     */
     public Message(int logout, User sender){
         // Får bara in en 1a när disconnect körs, får hanteras på server sidan för att stänga koppling / tråd
         this.logout = logout;
@@ -51,11 +62,11 @@ public class Message implements Serializable {
         return this.image;
     }
 
-    public void setTimeRecievedByServer() {
+    public void setTimeReceivedByServer() {
         // Mottagen tid server
     }
 
-    public String timeDeliveredtoClient() {
+    public String timeDeliveredToClient() {
         return (new SimpleDateFormat("HH:mm")).format(new Date());
     }
 
@@ -75,10 +86,6 @@ public class Message implements Serializable {
         timeMessageReceivedClient = time;
     }
 
-    public String toString() {
-        return null;
-    }
-
     public ArrayList<User> getReceivers() {
         return receivers;
     }
@@ -86,4 +93,8 @@ public class Message implements Serializable {
     public int getLogout(){
         return logout;
     }
+
+    public String toString() {
+            return null;
+        }
 }
