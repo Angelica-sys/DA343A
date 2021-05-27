@@ -137,6 +137,7 @@ public class ClientHandler {
                     o = ois.readObject();
                     if (o instanceof Ludvig.Client.Model.User){
                         System.out.println("USER MOTTAGEN");
+
                     } else if (o instanceof  Ludvig.Client.Model.Message){
                         listener.sendMessage(o);
                     }
