@@ -1,4 +1,4 @@
-package Ludvig.Server.view;
+package Ludvig.Server.View;
 
 import javax.swing.*;
 import java.awt.*;

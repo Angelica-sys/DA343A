@@ -1,6 +1,6 @@
 package Ludvig;
 
-import Ludvig.Server.controller.Controller;
+import Ludvig.Server.Controller.Controller;
 
 public class TestServer {
     public static void main(String[] args) {

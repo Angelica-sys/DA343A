@@ -58,46 +58,9 @@ public class User implements Serializable {
      */
     @Override
     public boolean equals(Object o){
-        if(o != null && o instanceof Ludvig.Server.model.User){
-            return username.equals(((Ludvig.Server.model.User) o).getUsername());
+        if(o != null && o instanceof User){
+            return username.equals(((User) o).getUsername());
         }
         return false;
     }
 }
-
-
-
-
-
-/*
-public class User implements Serializable {
-    private String name;
-    private ImageIcon icon;
-
-    */
-/**
-     * Constructing the user object
-     * @param name name of the user
-     * @param icon avatar for the user
-     *//*
-
-    public User(String name, ImageIcon icon){
-        this.name = name;
-        this.icon = icon;
-    }
-
-    */
-/**
-     * Get name of user
-     * @return username
-     *//*
-
-    public String getName() {
-        return name;
-    }
-
-    public ImageIcon getIcon(){
-        return icon;
-    }
-}
-*/

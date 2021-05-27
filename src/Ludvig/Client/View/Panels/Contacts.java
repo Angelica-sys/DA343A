@@ -140,6 +140,7 @@ public class Contacts extends JFrame implements ActionListener, PropertyChangeLi
         }
         savedList.removeSelectionInterval(0,savedList.getMaxSelectionIndex());
         view.setReceiverList(allUsers);
+        dispose();
     }
 
     /**
@@ -167,9 +168,11 @@ public class Contacts extends JFrame implements ActionListener, PropertyChangeLi
      * @param u User object
      * @return if duplicate = true
      */
-    public Boolean checkIfDuplicate(User u){
+    public Boolean checkIfDuplicate(User u)
+    {
         for (User user : savedUserList){
-            if (u.getUsername().equals(user.getUsername())){
+            if (u.getUsername().equals(user.getUsername()))
+            {
                 return true;
             }
         }

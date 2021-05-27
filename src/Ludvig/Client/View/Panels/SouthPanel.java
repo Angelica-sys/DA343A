@@ -92,6 +92,7 @@ public class SouthPanel extends JPanel {
                     JOptionPane.showMessageDialog(null, "Must specify at least 1 receiver", "Error", JOptionPane.WARNING_MESSAGE);
                 }else {
                     controller.sendMessage(southCenter.messageField.getText(), view.getReceiverList(), view.getImage());
+                    view.setImage(null);
                 }
             }
             if (e.getSource() == attachPicture){

@@ -82,4 +82,8 @@ public class Message implements Serializable {
     public ArrayList<User> getReceivers() {
         return receivers;
     }
+
+    public int getLogout(){
+        return logout;
+    }
 }

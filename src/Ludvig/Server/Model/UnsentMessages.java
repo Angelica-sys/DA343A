@@ -1,4 +1,4 @@
-package Ludvig.Server.model;
+package Ludvig.Server.Model;
 import Ludvig.SharedResources.User;
 import Ludvig.SharedResources.Message;
 import java.util.ArrayList;

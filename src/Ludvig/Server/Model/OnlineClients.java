@@ -1,13 +1,14 @@
-package Ludvig.Server.model;
+package Ludvig.Server.Model;
 
-import Ludvig.Server.server.ClientHandler;
+import Ludvig.Server.Controller.ClientHandler;
+import Ludvig.SharedResources.User;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
-import Ludvig.SharedResources.User;
-import Ludvig.SharedResources.Message;
+
 /**
- * OnlineClients is a synchronized HashMap containing the online users and their respective ClientHandlers
+ * OnlineClients is a synchronized HashMap containing the online users and their respective ClientHandler
  * @version 1.0
  */
 public class OnlineClients {
