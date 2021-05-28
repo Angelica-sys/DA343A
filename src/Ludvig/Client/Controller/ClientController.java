@@ -180,10 +180,12 @@ public class ClientController {
                         message = (Message) object;
                         message.setTimeMessageReceivedClient(LocalDateTime.now().toString());
                         pcs.firePropertyChange("Message", null, message);
+                        System.out.println("Klient har fått ett meddelande från server");
                     } else if (object instanceof ArrayList){
                         onlineUsers.clear();
                         onlineUsers = (ArrayList<User>) object;
                         pcs.firePropertyChange("Users", null, onlineUsers);
+                        System.out.println("Klient har fått ny användarlista");
                     }
                 }
             } catch (IOException | ClassNotFoundException e) {

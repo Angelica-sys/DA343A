@@ -94,7 +94,6 @@ public class ClientHandler {
             }
 
             while(!Thread.interrupted()){
-                System.out.println("SNURRAR");
                 try{
                     o = ois.readObject();
                     if (o instanceof User){
@@ -103,6 +102,7 @@ public class ClientHandler {
                         controller.loginUser(u, ClientHandler.this);
                     } else if (o instanceof Message){
                         Message m = (Message) o;
+                        System.out.println("MEDDELANDE MOTTAGET");
                         if (m.getLogout() == 0)
                             controller.sendMessage(m);
                         else

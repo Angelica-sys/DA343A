@@ -139,7 +139,7 @@ public class Contacts extends JFrame implements ActionListener, PropertyChangeLi
             }
         }
         savedList.removeSelectionInterval(0,savedList.getMaxSelectionIndex());
-        view.setReceiverList(allUsers);
+        view.setReceiverList(selectedUsers);
         dispose();
     }
 

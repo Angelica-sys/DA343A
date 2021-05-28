@@ -56,7 +56,6 @@ public class Controller {
     {
         if(!clients.findUser(user))
         {
-            System.out.println("FEL");
             clients.put(user, client);
             sendUserList();
             sendUnsentMessages(user);
