@@ -98,11 +98,9 @@ public class ClientHandler {
                     o = ois.readObject();
                     if (o instanceof User){
                         User u = (User) o;
-                        System.out.println("USER MOTTAGEN");
                         controller.loginUser(u, ClientHandler.this);
                     } else if (o instanceof Message){
                         Message m = (Message) o;
-                        System.out.println("MEDDELANDE MOTTAGET");
                         if (m.getLogout() == 0)
                             controller.sendMessage(m);
                         else

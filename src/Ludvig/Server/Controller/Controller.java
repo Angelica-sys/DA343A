@@ -77,6 +77,7 @@ public class Controller {
     {
         if(clients.removeClient(client))
         {
+            System.out.println("Användare borttagen");
             sendUserList();
             writeToLog("Client " + client.toString() + " removed");
         }
@@ -91,14 +92,22 @@ public class Controller {
     {
         for (User user : message.getReceivers())
         {
+            System.out.println(user.getUsername() + " mottagare");
             if (clients.findUser(user))
             {
-                message.setTimeReceivedByServer();
-                clients.get(user).sendObject(message);
-                writeToLog("Sent message");
+                try {
+                    System.out.println("hittade mottagare");
+                    message.setTimeReceivedByServer();
+                    clients.get(user).sendObject(message);
+                    writeToLog("Sent message");
+                } catch (Exception e){
+                    e.printStackTrace();
+                }
+
             }
             else
             {
+                System.out.println("Hittade inte mottagare");
                 unsent.put(user, message);
                 writeToLog("Message stored until recipient is online");
             }
@@ -119,6 +128,7 @@ public class Controller {
                 writeToLog("Sent message from storage");
             }
         }
+
     }
 
     /**

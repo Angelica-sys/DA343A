@@ -103,6 +103,8 @@ public class Contacts extends JFrame implements ActionListener, PropertyChangeLi
      */
     public void setContacts(){
         allUsers.clear();
+        savedListModel.clear();
+        onlineListModel.clear();
         savedUserList = controller.getSavedContacts();
         onlineUserList = controller.getOnlineUsers();
         for (User user : savedUserList){
