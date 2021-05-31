@@ -112,7 +112,20 @@ public class MainView extends JFrame implements PropertyChangeListener {
     @Override
     public void propertyChange(PropertyChangeEvent evt) {
         if (evt.getPropertyName().equals("Message")){
-            cPanel.append(evt.getNewValue().toString());
+            SwingUtilities.invokeLater(new Runnable() {
+                @Override
+                public void run() {
+                    cPanel.append(evt.getNewValue().toString());
+                }
+            });
+
+        } else if (evt.getPropertyName().equals("Picture")) {
+            SwingUtilities.invokeLater(new Runnable() {
+                @Override
+                public void run() {
+                    cPanel.appendPicture((ImageIcon) evt.getNewValue());
+                }
+            });
         }
     }
 }

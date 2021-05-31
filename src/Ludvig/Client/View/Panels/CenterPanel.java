@@ -11,8 +11,8 @@ import java.awt.*;
  * @Author Ludvig Wedin Pettersson
  */
 public class CenterPanel extends JPanel {
-    private DefaultListModel<String> listModel;
-    private JList<String> listPane;
+    private DefaultListModel<Object> listModel;
+    private JList<Object> listPane;
     private ClientController controller;
 
     /**
@@ -33,5 +33,10 @@ public class CenterPanel extends JPanel {
      */
     public void append(String message) {
         listModel.addElement(message);
+        listModel.addElement("\n");
+    }
+
+    public void appendPicture(ImageIcon icon){
+        listModel.addElement(icon);
     }
 }

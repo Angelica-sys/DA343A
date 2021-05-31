@@ -44,6 +44,7 @@ public class ClientHandler {
         try {
             oos.writeObject(o);
             oos.flush();
+            oos.flush();
         } catch (IOException e) {
             e.printStackTrace();
         }

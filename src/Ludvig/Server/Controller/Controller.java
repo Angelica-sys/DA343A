@@ -60,11 +60,13 @@ public class Controller {
             sendUserList();
             sendUnsentMessages(user);
             writeToLog(user.getUsername() + " logged in");
+            System.out.println("Accepted login");
         }
         else
         {
             client.closeClient();
             writeToLog(user.getUsername() + " denied log in");
+            System.out.println("denied login");
         }
     }
 
@@ -88,7 +90,7 @@ public class Controller {
      * within the Message-object
      * @param message The message that server received and need to send forward
      */
-    public void sendMessage(Message message)
+    public synchronized void sendMessage(Message message)
     {
         for (User user : message.getReceivers())
         {
@@ -118,6 +120,7 @@ public class Controller {
     {
         if(unsent.findUser(user))
         {
+            System.out.println("Hittat osända");
             ArrayList<Message> unsentMessages = unsent.get(user);
             for(Message m : unsentMessages)
             {

@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
+import java.util.concurrent.Semaphore;
 
 /**
  * OnlineClients is a synchronized HashMap containing the online users and their respective ClientHandler
@@ -14,6 +15,7 @@ import java.util.Map;
  */
 public class OnlineClients {
     private HashMap<User, ClientHandler> clients = new HashMap<User, ClientHandler>();
+    private final Object lock = new Object();
 
     /**
      * put places a new user and it's ClientHandler in the HashMap
@@ -21,7 +23,9 @@ public class OnlineClients {
      * @param client The online user's ClientHandler
      */
     public synchronized void put(User user, ClientHandler client){
-        clients.put(user, client);
+        synchronized (lock){
+            clients.put(user, client);
+        }
     }
 
     /**
@@ -30,7 +34,9 @@ public class OnlineClients {
      * @return ClientHandler
      */
     public synchronized ClientHandler get(User user){
-        return clients.get(user);
+        synchronized (lock){
+            return clients.get(user);
+        }
     }
 
     /**
@@ -39,6 +45,9 @@ public class OnlineClients {
      * @return boolean
      */
     public synchronized boolean findUser(User user){
+        synchronized (lock){
+
+        }
         return clients.containsKey(user);
     }
 
@@ -50,26 +59,18 @@ public class OnlineClients {
      */
     public synchronized boolean removeClient(ClientHandler client){
         boolean removed = false;
-
-        for (Map.Entry me : clients.entrySet()){
-            if (me.getValue() == client){
-                clients.remove(me.getKey());
-                System.out.println("CLIENT REMOVED");
-                removed = true;
-                for (Map.Entry m : clients.entrySet()){
-                    System.out.println(m.getValue().toString());
+        synchronized (lock){
+            for (Map.Entry me : clients.entrySet()){
+                if (me.getValue() == client){
+                    clients.remove(me.getKey());
+                    System.out.println("CLIENT REMOVED");
+                    removed = true;
+                    for (Map.Entry m : clients.entrySet()){
+                        System.out.println(m.getValue().toString());
+                    }
                 }
             }
         }
-
-        /*Iterator iter = clients.keySet().iterator();
-        while(iter.hasNext()){
-            User key = (User)iter.next();
-            if(clients.get(key).equals(client)){
-                iter.remove();
-                removed = true;
-            }
-        }*/
         return removed;
     }
 
@@ -78,11 +79,13 @@ public class OnlineClients {
      * @return ArrayList
      */
     public synchronized ArrayList<User> getOnlineList(){
-        ArrayList<User> users = new ArrayList<User>();
-        for(User u : clients.keySet()){
-            users.add(u);
+        synchronized (lock){
+            ArrayList<User> users = new ArrayList<User>();
+            for(User u : clients.keySet()){
+                users.add(u);
+            }
+            return users;
         }
-        return users;
     }
 
 

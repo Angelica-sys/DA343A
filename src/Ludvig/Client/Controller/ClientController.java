@@ -122,6 +122,7 @@ public class ClientController {
             Message newMessage = new Message(text, user, receivers, image);
             oos.writeObject(newMessage);
             oos.flush();
+            oos.flush();
             System.out.println("Meddelande skickat");
         } catch (IOException e) {
             e.printStackTrace();
@@ -213,7 +214,7 @@ public class ClientController {
                         messageString = message.getText() + " sent from " + message.getSender().getUsername() + " Time received: " + message.getTimeMessageReceivedClient();
 
                         if(message.getImage() != null){
-                            pcs.firePropertyChange("Message", null, message.getImage());
+                            pcs.firePropertyChange("Picture", null, message.getImage());
                         }
                         pcs.firePropertyChange("Message", null, messageString);
                         System.out.println("Klient har fått ett meddelande från server");

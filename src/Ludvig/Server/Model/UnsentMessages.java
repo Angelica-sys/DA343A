@@ -18,13 +18,17 @@ public class UnsentMessages {
      */
     public synchronized void put(User user,Message message) {
         if(findUser(user)){
-            get(user).add(message);
+            findList(user).add(message);
         }
         else {
             ArrayList<Message> list = new ArrayList<Message>();
-            list.add(message);
             unsent.put(user, list);
+            findList(user).add(message);
         }
+    }
+
+    public synchronized ArrayList<Message> findList(User user){
+        return unsent.get(user);
     }
 
     /**
