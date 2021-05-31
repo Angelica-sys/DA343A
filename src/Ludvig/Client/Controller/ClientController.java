@@ -90,6 +90,7 @@ public class ClientController {
             if(ois != null) ois.close();
             if(oos != null) oos.close();
             if(socket != null) socket.close();
+            user = null;
         }
         catch(Exception e) {}
         view.enableDisableButtons(false);
