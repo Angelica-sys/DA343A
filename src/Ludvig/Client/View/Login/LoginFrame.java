@@ -16,10 +16,10 @@ public class LoginFrame extends JFrame {
 
     /**
      * Constructs the frame
-     * @param controller reference to ClientController
+
      */
-    public LoginFrame(ClientController controller){
-        this.controller = controller;
+    public LoginFrame(){ //ClientController controller
+        // this.controller = controller;
 
         setTitle("Login window");
         setResizable(false);
@@ -77,11 +77,19 @@ public class LoginFrame extends JFrame {
                 if (name.equals("") || str.equals("")){
                     JOptionPane.showMessageDialog(null, "Username and picture must be selected", "Error", JOptionPane.WARNING_MESSAGE);
                 }else {
-                    if (controller.connect(name, str)){
+                    try {
+                        if (new ClientController("25.57.149.163", 55234).connect(userName.getText(), str)){
+                            dispose();
+                        }
+                    } catch (Exception e1) {
+                        e1.printStackTrace();
+                    }
+
+                    /*if (controller.connect(name, str)){
                         dispose();
                     }else {
                         JOptionPane.showMessageDialog(null, "Couldn't connect, try again", "Error", JOptionPane.WARNING_MESSAGE);
-                    }
+                    }*/
                 }
 
             } else if (e.getSource() == selectPic){

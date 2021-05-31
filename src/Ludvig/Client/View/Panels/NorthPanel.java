@@ -69,11 +69,13 @@ public class NorthPanel extends JPanel {
             if (loginFrame != null){
                 loginFrame.dispose();
             }
-            loginFrame = new LoginFrame(controller);
+            //loginFrame = new LoginFrame(controller);
         }
 
         if (e.getSource() == disconnect){
             controller.disconnect();
+            new LoginFrame();
+            view.dispose();
         }
     }
 }
