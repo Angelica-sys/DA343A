@@ -32,6 +32,11 @@ public class CenterPanel extends JPanel {
      * @param message
      */
     public void append(String message) {
-        listModel.addElement(message);
+        SwingUtilities.invokeLater(new Runnable() {
+            @Override
+            public void run() {
+                listModel.addElement(message);
+            }
+        });
     }
 }
