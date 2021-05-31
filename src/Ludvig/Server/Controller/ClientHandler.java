@@ -64,6 +64,7 @@ public class ClientHandler {
         }
         it.interrupt();
         it = null;
+        controller.removeClient(ClientHandler.this);
     }
 
 
@@ -100,13 +101,14 @@ public class ClientHandler {
                     if (o instanceof User){
                         User u = (User) o;
                         controller.loginUser(u, ClientHandler.this);
+                        controller.sendUnsentMessages(u);
                     } else if (o instanceof Message){
                         Message m = (Message) o;
                         m.setTimeReceivedByServer();
                         if (m.getLogout() == 0)
                             controller.sendMessage(m);
                         else
-                            controller.removeClient(ClientHandler.this);
+                            closeClient();
                     }
                 } catch (IOException e) {
                     closeClient();
@@ -114,7 +116,7 @@ public class ClientHandler {
                     e.printStackTrace();
                 }
             }
-            controller.removeClient(ClientHandler.this);
+            closeClient();
             System.out.println("STÄNGER TRÅD");
         }
     }

@@ -55,6 +55,7 @@ public class ClientController {
         try {
             socket = new Socket(ip, port);
             ImageIcon icon = new ImageIcon(path);
+            user = null;
             user = new User(name,icon);
             try {
                 oos = new ObjectOutputStream(socket.getOutputStream());
