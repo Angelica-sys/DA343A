@@ -33,7 +33,7 @@ public class UnsentMessages {
      * @return ArrayList
      */
     public synchronized ArrayList<Message> get(User user) {
-        return unsent.get(user);
+        return unsent.remove(user);
     }
 
     /**

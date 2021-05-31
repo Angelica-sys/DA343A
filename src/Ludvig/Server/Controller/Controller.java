@@ -95,7 +95,6 @@ public class Controller {
             if (clients.findUser(user))
             {
                 try {
-                    message.setTimeReceivedByServer();
                     clients.get(user).sendObject(message);
                     writeToLog("Sent message");
                 } catch (Exception e){
@@ -119,7 +118,8 @@ public class Controller {
     {
         if(unsent.findUser(user))
         {
-            for(Message m : unsent.get(user))
+            ArrayList<Message> unsentMessages = unsent.get(user);
+            for(Message m : unsentMessages)
             {
                 try {
                     sendMessage(m);

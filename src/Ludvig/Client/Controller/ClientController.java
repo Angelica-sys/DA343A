@@ -208,6 +208,7 @@ public class ClientController {
 
                         message = (Message) object;
                         message.setTimeMessageReceivedClient(LocalDateTime.now().toString());
+                        System.out.println(message.toString());
 
                         messageString = message.getText() + " sent from " + message.getSender().getUsername() + " Time received: " + message.getTimeMessageReceivedClient();
 

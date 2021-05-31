@@ -3,6 +3,7 @@ package Ludvig.SharedResources;
 import javax.swing.*;
 import java.io.Serializable;
 import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -63,7 +64,7 @@ public class Message implements Serializable {
     }
 
     public void setTimeReceivedByServer() {
-        // Mottagen tid server
+        timeMessageReceivedByServer = LocalDateTime.now().toString();
     }
 
     public String timeDeliveredToClient() {
@@ -94,7 +95,16 @@ public class Message implements Serializable {
         return logout;
     }
 
+    @Override
     public String toString() {
-            return null;
-        }
+        return "Message{" +
+                "sender=" + sender +
+                ", text='" + text + '\'' +
+                ", receivers=" + receivers +
+                ", image=" + image +
+                ", timeMessageReceivedByServer='" + timeMessageReceivedByServer + '\'' +
+                ", timeMessageReceivedClient='" + timeMessageReceivedClient + '\'' +
+                ", logout=" + logout +
+                '}';
+    }
 }

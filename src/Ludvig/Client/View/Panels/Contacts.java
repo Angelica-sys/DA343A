@@ -133,7 +133,7 @@ public class Contacts extends JFrame implements ActionListener, PropertyChangeLi
         for (int i = 0; i < selectedIx.length; i++){
             Object o = savedList.getModel().getElementAt(selectedIx[i]);
             for (String savedUser : savedUserList){
-                if (o.equals(savedUser)){
+                if (o.equals(savedUser) && !selectedUsers.contains(savedUser)){
                     selectedUsers.add(savedUser);
                 }
             }

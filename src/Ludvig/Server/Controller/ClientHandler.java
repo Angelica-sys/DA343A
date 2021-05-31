@@ -101,6 +101,7 @@ public class ClientHandler {
                         controller.loginUser(u, ClientHandler.this);
                     } else if (o instanceof Message){
                         Message m = (Message) o;
+                        m.setTimeReceivedByServer();
                         if (m.getLogout() == 0)
                             controller.sendMessage(m);
                         else

@@ -11,8 +11,8 @@ import java.awt.*;
  * @Author Ludvig Wedin Pettersson
  */
 public class CenterPanel extends JPanel {
-    private DefaultListModel<Object> listModel;
-    private JList<Object> listPane;
+    private DefaultListModel<String> listModel;
+    private JList<String> listPane;
     private ClientController controller;
 
     /**
@@ -31,7 +31,7 @@ public class CenterPanel extends JPanel {
      * Method for adding messages to the chat
      * @param message
      */
-    public void append(Object message) {
+    public void append(String message) {
         listModel.addElement(message);
     }
 }
