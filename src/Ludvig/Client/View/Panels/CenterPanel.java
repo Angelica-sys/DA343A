@@ -1,7 +1,6 @@
 package Ludvig.Client.View.Panels;
 
 import Ludvig.Client.Controller.ClientController;
-import Ludvig.SharedResources.Message;
 
 import javax.swing.*;
 import java.awt.*;
@@ -33,15 +32,6 @@ public class CenterPanel extends JPanel {
      * @param message
      */
     public void append(Object message) {
-        if(message instanceof Message) {
-            Message m = (Message) message;
-            listModel.addElement(m.getImage());
-            listModel.addElement(m.getText()+ " sent from " + m.getSender() + " Time received: " + m.getTimeMessageReceivedClient() );
-        }
-
-        else {
-            listModel.addElement(message);
-        }
-
+        listModel.addElement(message);
     }
 }

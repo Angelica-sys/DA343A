@@ -5,7 +5,6 @@ import Ludvig.Client.Controller.ClientController;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
-import java.awt.event.WindowEvent;
 
 /**
  * Class represents a pop-up window handling login credentials

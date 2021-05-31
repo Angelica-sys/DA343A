@@ -96,11 +96,21 @@ public class ClientController {
     /**
      * Creates Message object from parameters and puts into the stream.
      * @param text The text that is to be sent
-     * @param receivers List of receivers
+     * @param receiversUserNames List of receivers usernames
      * @param image Image file to be sent
      */
-    public synchronized void sendMessage(String text, ArrayList<User> receivers, ImageIcon image){
+    public synchronized void sendMessage(String text, ArrayList<String> receiversUserNames, ImageIcon image){
         try {
+            ArrayList<User> receivers = new ArrayList<>();
+
+            for(String receiverUserName : receiversUserNames){
+                for(User onlineUser : onlineUsers){
+                    if(receiverUserName.equals(onlineUser.getUsername())){
+                        receivers.add(onlineUser);
+                    }
+                }
+            }
+
             Message newMessage = new Message(text, user, receivers, image);
             oos.writeObject(newMessage);
             oos.flush();
@@ -112,12 +122,18 @@ public class ClientController {
 
     /**
      * Saves a contact User object in a file on the drive.
-     * @param user Received user object
+     * @param username Received user object
      */
-    public void saveContact(User user){
+    public void saveContact(String username){
         try(ObjectOutputStream output = new ObjectOutputStream(new FileOutputStream("files/contacts.bin", true))) {
-            output.writeObject(user);
-            output.flush();
+            for(User user : onlineUsers){
+                if(user.getUsername().equals(username)){
+                    output.writeObject(user);
+                    output.flush();
+                    break;
+                }
+            }
+
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -129,28 +145,31 @@ public class ClientController {
      * Reads file with saved User objects stored on the drive and places them in an ArrayList.
      * @return Returns ArrayList object
      */
-    public ArrayList<User> getSavedContacts(){
-        ArrayList<User> list = new ArrayList<>();
+    public ArrayList<String> getSavedContacts(){
+        ArrayList<String> userNames = new ArrayList<>();
         try (FileInputStream fis = new FileInputStream("files/contacts.bin")){
             User user;
             while (true){
                 ObjectInputStream input = new ObjectInputStream(fis);
                 user = (User) input.readObject();
-                list.add(user);
-
+                userNames.add(user.getUsername());
             }
         } catch (IOException | ClassNotFoundException e) {
             System.out.println("No more objects to read");
         }
-        for (User i: list
-        ) {
-            System.out.println(i.getUsername());
+        for (String i: userNames) {
+            System.out.println(i);
         }
-        return list;
+        return userNames;
     }
 
-    public ArrayList<User> getOnlineUsers() {
-        return onlineUsers;
+    public ArrayList<String> getOnlineUserNames() {
+        ArrayList<String> onlineUserNames = new ArrayList<>();
+
+        for(User onlineUser : onlineUsers){
+            onlineUserNames.add(onlineUser.getUsername());
+        }
+        return onlineUserNames;
     }
 
 
@@ -177,9 +196,17 @@ public class ClientController {
                 while (true) {
                     Object object = ois.readObject();
                     if (object instanceof Message){
+                        String messageString = null;
+
                         message = (Message) object;
                         message.setTimeMessageReceivedClient(LocalDateTime.now().toString());
-                        pcs.firePropertyChange("Message", null, message);
+
+                        messageString = message.getText() + " sent from " + message.getSender().getUsername() + " Time received: " + message.getTimeMessageReceivedClient();
+
+                        if(message.getImage() != null){
+                            pcs.firePropertyChange("Message", null, message.getImage());
+                        }
+                        pcs.firePropertyChange("Message", null, messageString);
                         System.out.println("Klient har fått ett meddelande från server");
                     } else if (object instanceof ArrayList){
                         onlineUsers.clear();

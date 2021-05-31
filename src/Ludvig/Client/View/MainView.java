@@ -1,8 +1,6 @@
 package Ludvig.Client.View;
 
-import Ludvig.SharedResources.Message;
 import Ludvig.Client.Controller.ClientController;
-import Ludvig.SharedResources.User;
 import Ludvig.Client.View.Panels.CenterPanel;
 import Ludvig.Client.View.Panels.NorthPanel;
 import Ludvig.Client.View.Panels.SouthPanel;
@@ -23,7 +21,7 @@ public class MainView extends JFrame implements PropertyChangeListener {
     private SouthPanel sPanel;
     private CenterPanel cPanel;
     private NorthPanel nPanel;
-    private ArrayList<User> receiverList;
+    private ArrayList<String> receiverList;
     private ImageIcon image;
 
 
@@ -55,16 +53,13 @@ public class MainView extends JFrame implements PropertyChangeListener {
         nPanel = new NorthPanel(this, controller);
         add(nPanel, BorderLayout.NORTH);
 
-        ArrayList<User> receivers = new ArrayList<>();
-        receivers.add(new User("Ludvig", null));
-        Message message = new Message("Heyyo", null, receivers, new ImageIcon("files/gubbe.jpg"));
-        cPanel.append(message);
+        ArrayList<String> receivers = new ArrayList<>();
+        //receivers.add(new User("Ludvig", null));
+        //Message message = new Message("Heyyo", null, receivers, new ImageIcon("files/gubbe.jpg"));
+        //cPanel.append(message);
 
         pack();
         setVisible(true);
-
-
-
     }
 
     /**
@@ -87,7 +82,7 @@ public class MainView extends JFrame implements PropertyChangeListener {
      * Receives and sets list of receivers
      * @param users list of users
      */
-    public void setReceiverList(ArrayList<User> users){
+    public void setReceiverList(ArrayList<String> users){
         receiverList.clear();
         receiverList = users;
     }
@@ -96,7 +91,7 @@ public class MainView extends JFrame implements PropertyChangeListener {
      * Gets the receiver list
      * @return receiver list
      */
-    public ArrayList<User> getReceiverList(){
+    public ArrayList<String> getReceiverList(){
         return receiverList;
     }
 

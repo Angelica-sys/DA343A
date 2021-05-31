@@ -5,7 +5,6 @@ import Ludvig.Client.View.Login.LoginFrame;
 import Ludvig.Client.View.MainView;
 
 import javax.swing.*;
-import java.awt.*;
 import java.awt.event.ActionEvent;
 
 /**

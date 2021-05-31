@@ -1,9 +1,7 @@
 package Ludvig.Client.View.Panels;
 
 import Ludvig.Client.Controller.ClientController;
-import Ludvig.SharedResources.User;
 import Ludvig.Client.View.MainView;
-
 
 import javax.swing.*;
 import java.awt.*;
@@ -22,9 +20,9 @@ import java.util.ArrayList;
 public class Contacts extends JFrame implements ActionListener, PropertyChangeListener {
     private MainView view;
     private ClientController controller;
-    private ArrayList<User> allUsers;
-    private ArrayList<User> onlineUserList = new ArrayList<>();
-    private ArrayList<User> savedUserList = new ArrayList<>();
+    private ArrayList<String> allUsers;
+    private ArrayList<String> onlineUserList = new ArrayList<>();
+    private ArrayList<String> savedUserList = new ArrayList<>();
 
     private JPanel north;
     private JPanel south;
@@ -106,13 +104,13 @@ public class Contacts extends JFrame implements ActionListener, PropertyChangeLi
         savedListModel.clear();
         onlineListModel.clear();
         savedUserList = controller.getSavedContacts();
-        onlineUserList = controller.getOnlineUsers();
-        for (User user : savedUserList){
-            allUsers.add(user);
-            savedListModel.addElement(user.getUsername());
-        } for (User user : onlineUserList){
-            allUsers.add(user);
-            onlineListModel.addElement(user.getUsername());
+        onlineUserList = controller.getOnlineUserNames();
+        for (String userName : savedUserList){
+            allUsers.add(userName);
+            savedListModel.addElement(userName);
+        } for (String userName : onlineUserList){
+            allUsers.add(userName);
+            onlineListModel.addElement(userName);
         }
     }
 
@@ -122,21 +120,21 @@ public class Contacts extends JFrame implements ActionListener, PropertyChangeLi
      */
     public void selectedUsers(){
         int[] selectedIx = onlineList.getSelectedIndices();
-        ArrayList<User> selectedUsers = new ArrayList<>();
+        ArrayList<String> selectedUsers = new ArrayList<>();
         for (int i = 0; i < selectedIx.length; i++) {
             Object o = onlineList.getModel().getElementAt(selectedIx[i]);
-            for(User u : onlineUserList) {
-                if(o.equals(u.getUsername()))
-                    selectedUsers.add(u);
+            for(String onlineUser : onlineUserList) {
+                if(o.equals(onlineUser))
+                    selectedUsers.add(onlineUser);
             }
         }
         onlineList.removeSelectionInterval(0,onlineList.getMaxSelectionIndex());
         selectedIx = savedList.getSelectedIndices();
         for (int i = 0; i < selectedIx.length; i++){
             Object o = savedList.getModel().getElementAt(selectedIx[i]);
-            for (User u : savedUserList){
-                if (o.equals(u.getUsername())){
-                    selectedUsers.add(u);
+            for (String savedUser : savedUserList){
+                if (o.equals(savedUser)){
+                    selectedUsers.add(savedUser);
                 }
             }
         }
@@ -152,12 +150,13 @@ public class Contacts extends JFrame implements ActionListener, PropertyChangeLi
         int[] selUsers = onlineList.getSelectedIndices();
         for (int i = 0; i < selUsers.length; i++){
             Object o = onlineList.getModel().getElementAt(selUsers[i]);
-            for (User u : onlineUserList){
-                if (o.equals(u.getUsername())){
-                    if (checkIfDuplicate(u)){
+            for (String userName : onlineUserList){
+                if (o.equals(userName)){
+                    if (checkIfDuplicate(userName))
+                    {
                         break;
                     } else {
-                        controller.saveContact(u);
+                        controller.saveContact(userName);
                     }
                 }
             }
@@ -167,13 +166,13 @@ public class Contacts extends JFrame implements ActionListener, PropertyChangeLi
 
     /**
      * Checks if user already is saved, used by saveContacts method.
-     * @param u User object
+     * @param userName
      * @return if duplicate = true
      */
-    public Boolean checkIfDuplicate(User u)
+    public Boolean checkIfDuplicate(String userName)
     {
-        for (User user : savedUserList){
-            if (u.getUsername().equals(user.getUsername()))
+        for (String savedUser : savedUserList){
+            if (userName.equals(savedUser))
             {
                 return true;
             }
