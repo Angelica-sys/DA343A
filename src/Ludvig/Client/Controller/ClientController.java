@@ -113,7 +113,7 @@ public class ClientController {
                     }
                 }
                 for (User savedContact : savedContacts){
-                    if (receiverUserName.equals(savedContact.getUsername())){
+                    if (receiverUserName.equals(savedContact.getUsername()) && !receivers.contains(savedContact)){
                         receivers.add(savedContact);
                     }
                 }
