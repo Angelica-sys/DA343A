@@ -112,6 +112,7 @@ public class ClientHandler {
                     e.printStackTrace();
                 }
             }
+            controller.removeClient(ClientHandler.this);
             System.out.println("STÄNGER TRÅD");
         }
     }

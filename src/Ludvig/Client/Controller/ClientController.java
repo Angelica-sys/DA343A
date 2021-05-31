@@ -166,9 +166,6 @@ public class ClientController {
         } catch (IOException | ClassNotFoundException e) {
             System.out.println("No more objects to read");
         }
-        for (String i: userNames) {
-            System.out.println(i);
-        }
         return userNames;
     }
 
@@ -203,6 +200,7 @@ public class ClientController {
             try {
                 System.out.println("Klient lyssnar på: " + port);
                 while (true) {
+                    System.out.println("Kör");
                     Object object = ois.readObject();
                     if (object instanceof Message){
                         String messageString = null;
