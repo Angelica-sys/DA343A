@@ -7,6 +7,7 @@ import javax.swing.*;
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
 import java.io.*;
+import java.lang.reflect.Array;
 import java.net.Socket;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -26,7 +27,8 @@ public class ClientController {
     private Thread receiverThread;
     private PropertyChangeSupport pcs;
     private Message message;
-    private ArrayList<User> onlineUsers = new ArrayList<>();
+    private ArrayList<User> onlineContacts = new ArrayList<>();
+    private ArrayList<User> savedContacts = new ArrayList<>();
     private Socket socket;
 
 
@@ -104,9 +106,14 @@ public class ClientController {
             ArrayList<User> receivers = new ArrayList<>();
 
             for(String receiverUserName : receiversUserNames){
-                for(User onlineUser : onlineUsers){
+                for(User onlineUser : onlineContacts){
                     if(receiverUserName.equals(onlineUser.getUsername())){
                         receivers.add(onlineUser);
+                    }
+                }
+                for (User savedContact : savedContacts){
+                    if (receiverUserName.equals(savedContact.getUsername())){
+                        receivers.add(savedContact);
                     }
                 }
             }
@@ -126,7 +133,7 @@ public class ClientController {
      */
     public void saveContact(String username){
         try(ObjectOutputStream output = new ObjectOutputStream(new FileOutputStream("files/contacts.bin", true))) {
-            for(User user : onlineUsers){
+            for(User user : onlineContacts){
                 if(user.getUsername().equals(username)){
                     output.writeObject(user);
                     output.flush();
@@ -147,11 +154,13 @@ public class ClientController {
      */
     public ArrayList<String> getSavedContacts(){
         ArrayList<String> userNames = new ArrayList<>();
+        savedContacts.clear();
         try (FileInputStream fis = new FileInputStream("files/contacts.bin")){
             User user;
             while (true){
                 ObjectInputStream input = new ObjectInputStream(fis);
                 user = (User) input.readObject();
+                savedContacts.add(user);
                 userNames.add(user.getUsername());
             }
         } catch (IOException | ClassNotFoundException e) {
@@ -166,8 +175,8 @@ public class ClientController {
     public ArrayList<String> getOnlineUserNames() {
         ArrayList<String> onlineUserNames = new ArrayList<>();
 
-        for(User onlineUser : onlineUsers){
-            onlineUserNames.add(onlineUser.getUsername());
+        for(User user : onlineContacts){
+            onlineUserNames.add(user.getUsername());
         }
         return onlineUserNames;
     }
@@ -209,13 +218,14 @@ public class ClientController {
                         pcs.firePropertyChange("Message", null, messageString);
                         System.out.println("Klient har fått ett meddelande från server");
                     } else if (object instanceof ArrayList){
-                        onlineUsers.clear();
-                        onlineUsers = (ArrayList<User>) object;
-                        pcs.firePropertyChange("Users", null, onlineUsers);
+                        onlineContacts.clear();
+                        onlineContacts = (ArrayList<User>) object;
+                        pcs.firePropertyChange("Users", null, onlineContacts);
                         System.out.println("Klient har fått ny användarlista");
                     }
                 }
             } catch (IOException | ClassNotFoundException e) {
+                e.printStackTrace();
             }
         }
     }

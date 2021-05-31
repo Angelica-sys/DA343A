@@ -6,6 +6,7 @@ import Ludvig.SharedResources.User;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.Map;
 
 /**
  * OnlineClients is a synchronized HashMap containing the online users and their respective ClientHandler
@@ -49,14 +50,26 @@ public class OnlineClients {
      */
     public synchronized boolean removeClient(ClientHandler client){
         boolean removed = false;
-        Iterator iter = clients.keySet().iterator();
+
+        for (Map.Entry me : clients.entrySet()){
+            if (me.getValue() == client){
+                clients.remove(me.getKey());
+                System.out.println("CLIENT REMOVED");
+                removed = true;
+                for (Map.Entry m : clients.entrySet()){
+                    System.out.println(m.getValue().toString());
+                }
+            }
+        }
+
+        /*Iterator iter = clients.keySet().iterator();
         while(iter.hasNext()){
             User key = (User)iter.next();
             if(clients.get(key).equals(client)){
                 iter.remove();
                 removed = true;
             }
-        }
+        }*/
         return removed;
     }
 

@@ -92,18 +92,15 @@ public class Controller {
     {
         for (User user : message.getReceivers())
         {
-            System.out.println(user.getUsername() + " mottagare");
             if (clients.findUser(user))
             {
                 try {
-                    System.out.println("hittade mottagare");
                     message.setTimeReceivedByServer();
                     clients.get(user).sendObject(message);
                     writeToLog("Sent message");
                 } catch (Exception e){
                     e.printStackTrace();
                 }
-
             }
             else
             {
@@ -124,8 +121,13 @@ public class Controller {
         {
             for(Message m : unsent.get(user))
             {
-                sendMessage(m);
-                writeToLog("Sent message from storage");
+                try {
+                    sendMessage(m);
+                    writeToLog("Sent message from storage");
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+
             }
         }
 
