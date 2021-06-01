@@ -34,6 +34,7 @@ public class NorthPanel extends JPanel {
         connect = new JButton("Connect");
         connect.addActionListener(this::actionEvent);
         add(connect);
+        connect.setVisible(false);
 
         disconnect = new JButton("Disconnect");
         disconnect.addActionListener(this::actionEvent);

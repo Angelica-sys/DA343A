@@ -78,7 +78,7 @@ public class LoginFrame extends JFrame {
                     JOptionPane.showMessageDialog(null, "Username and picture must be selected", "Error", JOptionPane.WARNING_MESSAGE);
                 }else {
                     try {
-                        if (new ClientController("25.57.149.163", 55234).connect(userName.getText(), str)){
+                        if (new ClientController("25.57.149.163", 55234, name).connect(userName.getText(), str)){
                             dispose();
                         }
                     } catch (Exception e1) {

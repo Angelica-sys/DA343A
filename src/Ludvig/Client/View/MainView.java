@@ -29,11 +29,12 @@ public class MainView extends JFrame implements PropertyChangeListener {
      * Constructs the frame
      * @param controller ClientController reference
      */
-    public MainView(ClientController controller){
+    public MainView(ClientController controller, String name){
         this.controller = controller;
         receiverList = new ArrayList<>();
         controller.addListener(this);
         setupFrame();
+        setTitle("Client: " + name);
     }
 
     /**
@@ -42,7 +43,7 @@ public class MainView extends JFrame implements PropertyChangeListener {
     public void setupFrame(){
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setPreferredSize(new Dimension(400,800));
-        setTitle("Client");
+
 
         sPanel = new SouthPanel(this ,controller);
         add(sPanel, BorderLayout.SOUTH);
@@ -52,11 +53,6 @@ public class MainView extends JFrame implements PropertyChangeListener {
 
         nPanel = new NorthPanel(this, controller);
         add(nPanel, BorderLayout.NORTH);
-
-        ArrayList<String> receivers = new ArrayList<>();
-        //receivers.add(new User("Ludvig", null));
-        //Message message = new Message("Heyyo", null, receivers, new ImageIcon("files/gubbe.jpg"));
-        //cPanel.append(message);
 
         pack();
         setVisible(true);

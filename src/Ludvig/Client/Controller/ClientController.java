@@ -37,11 +37,11 @@ public class ClientController {
      * @param ip ip-address
      * @param port port#
      */
-    public ClientController(String ip, int port){
+    public ClientController(String ip, int port, String name){
         pcs = new PropertyChangeSupport(this);
         this.ip = ip;
         this.port = port;
-        view = new MainView(this);
+        view = new MainView(this, name);
     }
 
 
