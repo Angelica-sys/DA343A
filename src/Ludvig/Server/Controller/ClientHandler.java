@@ -101,7 +101,6 @@ public class ClientHandler {
                     if (o instanceof User){
                         User u = (User) o;
                         controller.loginUser(u, ClientHandler.this);
-                        controller.sendUnsentMessages(u);
                     } else if (o instanceof Message){
                         Message m = (Message) o;
                         m.setTimeReceivedByServer();
