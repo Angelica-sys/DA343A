@@ -7,7 +7,6 @@ import javax.swing.*;
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
 import java.io.*;
-import java.lang.reflect.Array;
 import java.net.Socket;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -24,8 +23,8 @@ public class ClientController {
     private String ip;
     private int port;
     private User user;
-    private Thread receiverThread;
-    private PropertyChangeSupport pcs;
+    private Thread inputstreamReceiverThread;
+    private PropertyChangeSupport pcs; //Callback
     private Message message;
     private ArrayList<User> onlineContacts = new ArrayList<>();
     private ArrayList<User> savedContacts = new ArrayList<>();
@@ -46,7 +45,7 @@ public class ClientController {
 
 
     /**
-     * Method connecting to server, creates and sends a user object for verification.
+     * Method connecting the client to server, creates and sends a user object for verification.
      * User object is created with incoming parameters name and filepath for picture.
      * @param name String of name
      * @param path String of filepath
@@ -64,9 +63,9 @@ public class ClientController {
                 oos.flush();
                 oos.writeObject(user);
                 oos.flush();
-                if (receiverThread == null){
-                    receiverThread = new Receiver();
-                    receiverThread.start();
+                if (inputstreamReceiverThread == null){
+                    inputstreamReceiverThread = new Receiver();
+                    inputstreamReceiverThread.start();
                 } System.out.println("Klient uppkopplad");
             } catch (IOException e) {
                 e.printStackTrace();
