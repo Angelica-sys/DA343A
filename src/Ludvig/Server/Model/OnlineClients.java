@@ -10,7 +10,8 @@ import java.util.Map;
 import java.util.concurrent.Semaphore;
 
 /**
- * OnlineClients is a synchronized HashMap containing the online users and their respective ClientHandler
+ * Class handling all connected clients, stores them in HashMap
+ * @Author Ludvig Wedin Pettersson, Jonathan Engström, Angelica Asplund
  * @version 1.0
  */
 public class OnlineClients {
@@ -18,9 +19,9 @@ public class OnlineClients {
     private final Object lock = new Object();
 
     /**
-     * put places a new user and it's ClientHandler in the HashMap
-     * @param user A new online user
-     * @param client The online user's ClientHandler
+     * Adds User and its ClientHandler to HashMap
+     * @param user Connecting user
+     * @param client Users ClientHandler
      */
     public synchronized void put(User user, ClientHandler client){
         synchronized (lock){
@@ -29,8 +30,8 @@ public class OnlineClients {
     }
 
     /**
-     * get retreives the ClientHandler that is used by the specified user
-     * @param user The specified user
+     * Get fetches a specified users ClientHandler
+     * @param user User object
      * @return ClientHandler
      */
     public synchronized ClientHandler get(User user){
@@ -40,9 +41,9 @@ public class OnlineClients {
     }
 
     /**
-     * findUser checks if the specified user exists in the HashMap
+     * Checks if a user already exists in the HAshMap
      * @param user The specified user
-     * @return boolean
+     * @return Boolean
      */
     public synchronized boolean findUser(User user){
         synchronized (lock){
@@ -52,8 +53,7 @@ public class OnlineClients {
     }
 
     /**
-     * removeClient removes an entry of a User-ClientHandler in the HashMap if the specified client exists as
-     * a value in any entry pair within the HashMap
+     * Removes position in the HashMap using a specified ClientHandler
      * @param client The specified ClientHandler
      * @return boolean
      */
@@ -75,7 +75,7 @@ public class OnlineClients {
     }
 
     /**
-     * getOnlineList retrieves an ArrayList of the current active users in the system
+     * Creates and returns an ArrayList with all online users
      * @return ArrayList
      */
     public synchronized ArrayList<User> getOnlineList(){

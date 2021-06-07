@@ -11,17 +11,16 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 /**
- * Gui is a JFrame-sub class that shows the Server log with options to check
- * the log between specified dates and timestamps
+ * The servers GUI
  * @version 1.0
  */
 public class Gui extends JFrame implements ActionListener {
-    private JPanel northPanel = new JPanel(), centerPanel = new JPanel(), southPanel = new JPanel(), northWestPanel, northEastPanel;
-    private JTextArea textArea = new JTextArea();
+    private JPanel northPanel = new JPanel(), centerPanel = new JPanel(), southPanel = new JPanel(), nWestPanel, nEastPanel;
+    private JTextArea txtArea = new JTextArea();
     private DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd"), timeFormat = new SimpleDateFormat("HH:mm:ss");
     private JFormattedTextField tfFromDate, tfToDate, tfFromTime, tfToTime;
-    private JLabel labelFromDate, labelToDate, labelFromTime, labelToTime, labelStart, labelStartTime, hostIPandPort;
-    private JButton search = new JButton("Search"), clear = new JButton("Clear");
+    private JLabel lblFromDate, lblToDate, lblFromTime, lblToTime, lblStart, lblStartTime, lblIpPort;
+    private JButton btnSearch = new JButton("Search"), btnClear = new JButton("Clear");
     private Date date = new Date();
 
     public Gui(InetAddress ip, int port){
@@ -29,16 +28,16 @@ public class Gui extends JFrame implements ActionListener {
         System.out.println(ip + " : " + port);
         setPreferredSize(new Dimension(600,600));
         setLayout(new BorderLayout());
-        textArea.setPreferredSize(new Dimension(580, 450));
-        centerPanel.add(textArea);
+        txtArea.setPreferredSize(new Dimension(580, 450));
+        centerPanel.add(txtArea);
 
-        hostIPandPort = new JLabel("Host: " + ip + " ::: Server Port: " + port);
-        southPanel.add(hostIPandPort);
+        lblIpPort = new JLabel("Host: " + ip + " ::: Server Port: " + port);
+        southPanel.add(lblIpPort);
 
         createNorthPanels();
         northPanel.setLayout(new GridLayout(1,2));
-        northPanel.add(northWestPanel);
-        northPanel.add(northEastPanel);
+        northPanel.add(nWestPanel);
+        northPanel.add(nEastPanel);
 
         add(northPanel, BorderLayout.NORTH);
         add(centerPanel, BorderLayout.CENTER);
@@ -56,40 +55,40 @@ public class Gui extends JFrame implements ActionListener {
         tfFromTime = new JFormattedTextField(timeFormat);
         tfToTime = new JFormattedTextField(timeFormat);
 
-        northWestPanel = new JPanel();
-        northWestPanel.setLayout(new GridLayout(2,4));
+        nWestPanel = new JPanel();
+        nWestPanel.setLayout(new GridLayout(2,4));
         tfFromDate.setText("");
         tfToDate.setText("");
         tfFromTime.setText("00:00:00");
         tfToTime.setText("23:59:59");
 
-        labelFromDate = new JLabel("From date:");
-        labelFromTime = new JLabel("From time:");
-        labelToDate = new JLabel("To date:");
-        labelToTime = new JLabel("To time:");
+        lblFromDate = new JLabel("From date:");
+        lblFromTime = new JLabel("From time:");
+        lblToDate = new JLabel("To date:");
+        lblToTime = new JLabel("To time:");
 
-        northWestPanel.add(labelFromDate);
-        northWestPanel.add(tfFromDate);
-        northWestPanel.add(labelFromTime);
-        northWestPanel.add(tfFromTime);
+        nWestPanel.add(lblFromDate);
+        nWestPanel.add(tfFromDate);
+        nWestPanel.add(lblFromTime);
+        nWestPanel.add(tfFromTime);
 
-        northWestPanel.add(labelToDate);
-        northWestPanel.add(tfToDate);
-        northWestPanel.add(labelToTime);
-        northWestPanel.add(tfToTime);
+        nWestPanel.add(lblToDate);
+        nWestPanel.add(tfToDate);
+        nWestPanel.add(lblToTime);
+        nWestPanel.add(tfToTime);
 
-        northEastPanel = new JPanel();
-        northEastPanel.setLayout(new GridLayout(2,2));
-        labelStart = new JLabel("Server start time: ");
-        labelStartTime = new JLabel(date.toString());
+        nEastPanel = new JPanel();
+        nEastPanel.setLayout(new GridLayout(2,2));
+        lblStart = new JLabel("Server start time: ");
+        lblStartTime = new JLabel(date.toString());
 
-        search.addActionListener(this);
-        clear.addActionListener(this);
+        btnSearch.addActionListener(this);
+        btnClear.addActionListener(this);
 
-        northEastPanel.add(labelStart);
-        northEastPanel.add(labelStartTime);
-        northEastPanel.add(search);
-        northEastPanel.add(clear);
+        nEastPanel.add(lblStart);
+        nEastPanel.add(lblStartTime);
+        nEastPanel.add(btnSearch);
+        nEastPanel.add(btnClear);
     }
 
     public void searchFile(){
@@ -114,15 +113,15 @@ public class Gui extends JFrame implements ActionListener {
                 ois = new ObjectInputStream(new BufferedInputStream(new FileInputStream("files/ServerLog.dat")));
                 while ((o = ois.readObject()) != null) {
                     if ((((Date) o).after(fromDate)) && ((Date) o).before(toDate)) {
-                        textArea.append(o.toString() + "\n");
-                        textArea.append(ois.readObject() + "\n");
+                        txtArea.append(o.toString() + "\n");
+                        txtArea.append(ois.readObject() + "\n");
                     } else {
                         ois.readObject();
                     }
                 }
-                textArea.append("END OF SEARCH\n");
+                txtArea.append("END OF SEARCH\n");
             } catch (EOFException e) {
-                textArea.append("END OF FILE\n");
+                txtArea.append("END OF FILE\n");
             } catch (ClassNotFoundException | IOException ex) {
                 ex.printStackTrace();
             }
@@ -130,12 +129,16 @@ public class Gui extends JFrame implements ActionListener {
     }
 
 
+    /**
+     * ActionListeners for buttons
+     * @param e Source of call
+     */
     @Override
     public void actionPerformed(ActionEvent e) {
-        if (e.getSource() == clear){
-            textArea.setText("");
+        if (e.getSource() == btnClear){
+            txtArea.setText("");
         }
-        else if (e.getSource() == search){
+        else if (e.getSource() == btnSearch){
             searchFile();
         }
     }
