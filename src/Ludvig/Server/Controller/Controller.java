@@ -141,7 +141,7 @@ public class Controller {
      */
     public void sendUserList()
     {
-        ArrayList<User> onlineList = clients.getOnlineList();
+        ArrayList<User> onlineList = clients.getOnlineClientsList();
         for(User u : onlineList)
         {
             ClientHandler cl = clients.get(u);

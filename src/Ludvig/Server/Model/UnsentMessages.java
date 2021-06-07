@@ -5,16 +5,16 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 /**
- * UnsentMessages stores the Message-object that failed to be sent, in a synchronized
- * HashMap along with their respective recipient
+ * UnsentMessages class stores the Message-object that failed to be sent to a client due to not being connected to the server,
+ * in a synchronized HashMap along with the message/s respective recipient
  */
 public class UnsentMessages {
     private HashMap<User, ArrayList<Message>> unsent = new HashMap<User, ArrayList<Message>>();
 
     /**
-     * put places the unsent Message-object in it's recipients ArrayList of unsent Messages
-     * @param user The user who couldn't receive a message
-     * @param message The message that was to be sent
+     * put method places the unsent Message-object in it's recipients(client) ArrayList of unsent Messages
+     * @param user The user that couldn't receive a message/s
+     * @param message The message that is waiting to be sent to its recipient
      */
     public synchronized void put(User user,Message message) {
         if(findUser(user)){
@@ -32,8 +32,8 @@ public class UnsentMessages {
     }
 
     /**
-     * get retrieves the unsent messages from a specified user
-     * @param user The user whose unsent messages is to be retrieved
+     * get method retrieves the unsent message/s from a specified user
+     * @param user The user whose messages that failed to be sent and is to be retrieved
      * @return ArrayList
      */
     public synchronized ArrayList<Message> get(User user) {
@@ -41,7 +41,7 @@ public class UnsentMessages {
     }
 
     /**
-     * findUser checks if a specified user exists in the HashMap
+     * findUser method checks if a specified user exists in the HashMap of unsent Messages
      * @param user The specified user
      * @return boolean
      */

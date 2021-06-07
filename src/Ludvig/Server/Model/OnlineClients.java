@@ -5,12 +5,10 @@ import Ludvig.SharedResources.User;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.Map;
-import java.util.concurrent.Semaphore;
 
 /**
- * OnlineClients is a synchronized HashMap containing the online users and their respective ClientHandler
+ * OnlineClients is a synchronized HashMap containing the online users with their ClientHandler
  * @version 1.0
  */
 public class OnlineClients {
@@ -18,7 +16,7 @@ public class OnlineClients {
     private final Object lock = new Object();
 
     /**
-     * put places a new user and it's ClientHandler in the HashMap
+     * the put method places a new user and its ClientHandler in the HashMap clients
      * @param user A new online user
      * @param client The online user's ClientHandler
      */
@@ -29,7 +27,7 @@ public class OnlineClients {
     }
 
     /**
-     * get retreives the ClientHandler that is used by the specified user
+     * the get method retreives the user (from the input parameter) and its ClientHandler.
      * @param user The specified user
      * @return ClientHandler
      */
@@ -40,7 +38,7 @@ public class OnlineClients {
     }
 
     /**
-     * findUser checks if the specified user exists in the HashMap
+     * findUser method checks if the user (put in the input parameter) exists in the HashMap clients
      * @param user The specified user
      * @return boolean
      */
@@ -52,8 +50,8 @@ public class OnlineClients {
     }
 
     /**
-     * removeClient removes an entry of a User-ClientHandler in the HashMap if the specified client exists as
-     * a value in any entry pair within the HashMap
+     * removeClient removes an entry of a User-ClientHandler pair(key,value) in the HashMap if that client exists as
+     * a value in any entry pair in the HashMap
      * @param client The specified ClientHandler
      * @return boolean
      */
@@ -75,10 +73,10 @@ public class OnlineClients {
     }
 
     /**
-     * getOnlineList retrieves an ArrayList of the current active users in the system
+     * getOnlineList method retrieves an ArrayList of the current active client connected to the server
      * @return ArrayList
      */
-    public synchronized ArrayList<User> getOnlineList(){
+    public synchronized ArrayList<User> getOnlineClientsList(){
         synchronized (lock){
             ArrayList<User> users = new ArrayList<User>();
             for(User u : clients.keySet()){
