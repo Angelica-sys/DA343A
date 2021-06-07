@@ -12,14 +12,17 @@ import java.util.ArrayList;
 import java.util.Date;
 import Ludvig.Server.Model.*;
 
-
+/**
+ * Controller for the server.
+ * @Author Ludvig Wedin Pettersson, Jonathan Engström, Angelica Asplund
+ */
 public class Controller {
     private OnlineClients clients = new OnlineClients();
     private UnsentMessages unsent = new UnsentMessages();
     private ObjectOutputStream oos;
 
     /**
-     * Class constructor. Creates a new Server-object, Gui and ObjectOutputStream
+     * Constructor for the class, initiates GUI and OutputStream for ServerLog
      * @param port Server port
      */
     public Controller(int port)
@@ -71,8 +74,7 @@ public class Controller {
     }
 
     /**
-     * removeClient removes an active user in the system if that user's client is the
-     * same as the client in the parameter
+     * Tries to remove a client from OnlineUsers
      * @param client The client to be removed
      */
     public void removeClient(ClientHandler client)
@@ -168,7 +170,7 @@ public class Controller {
     }
 
     /**
-     * Thread used to create connections to connecting clients.
+     * Inner class Thread handling incoming connection attempts
      */
     private class Server extends Thread
     {

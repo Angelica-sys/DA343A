@@ -8,10 +8,10 @@ import java.util.ArrayList;
 import java.util.Date;
 
 /**
- * This Message class keeps track of where a massage comes 
- * from and where it is delivered, it transforms the data received from a sender to a message displayed in the chat window.
+ * Represents a message
+ * Holds information about sender, receivers, text, image and timestamps
  * @version 1.0
- * @author Angelica Asplund, Ludvig Wedin Pettersson
+ * @author Angelica Asplund, Ludvig Wedin Pettersson, Jonathan Engström
  */
 public class Message implements Serializable {
     private User sender;

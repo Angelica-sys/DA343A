@@ -6,7 +6,7 @@ import java.io.Serializable;
 /**
  * Class representing a user in the system
  * @Version 1.0
- * @Author Ludvig Wedin Pettersson
+ * @Author Ludvig Wedin Pettersson, Jonathan Engströn, Angelica Asplund
  */
 
 

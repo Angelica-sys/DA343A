@@ -9,7 +9,8 @@ import java.io.ObjectOutputStream;
 import java.net.Socket;
 
 /**
- * Class used to handle clients that connect to the server.
+ * Class that handles connected clients
+ * @Author Ludvig Wedin Pettersson, Jonathan Engström, Angelica Asplund
  */
 public class ClientHandler {
     private Socket socket;
@@ -20,7 +21,7 @@ public class ClientHandler {
     /**
      * Class constructor that saves the references to it's socket and controller reference, and also creates and starts
      * the inner Thread-class that ClientHandler uses
-     * @param socket The client's socket to connect to the server
+     * @param socket Socket to connect to the server
      * @param controller Reference to controller
      */
     public ClientHandler(Socket socket, Controller controller)
@@ -37,7 +38,7 @@ public class ClientHandler {
     }
 
     /**
-     * Sends an object to the connected client.
+     * Sends object to the connected client.
      * @param o Object to send to the client.
      */
     public void sendObject(Object o) {
@@ -51,7 +52,7 @@ public class ClientHandler {
     }
 
     /**
-     * closeClient sets up the closing process of disconnecting the server and a client
+     * closeClient handles disconnecting clients
      */
     public void closeClient(){
         if(!socket.isClosed() && socket.isConnected())
@@ -71,8 +72,7 @@ public class ClientHandler {
 
 
     /**
-     * InputThread is an inner class with a thread that will continually checks for objects to be
-     * received through the ObjectInputStream between a client and the server
+     * InputThread is a private inner class that is a thread, the thread will check for incoming objects from the InputStream
      * @version 1.0
      */
     private class InputThread extends Thread
@@ -81,8 +81,8 @@ public class ClientHandler {
         private Object o;
 
         /**
-         * The thread will setup the ObjectInputStream and check if there are any objects to be received
-         * If so then they are sent through the callback-object listener
+         * Run method of the Thread, will run as long as client is connected to server.
+         * Checks for incoming objects and handles them depending on type.
          */
         public void run(){
             System.out.println("Lyssnar på klient");
