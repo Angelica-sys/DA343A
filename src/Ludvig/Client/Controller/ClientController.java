@@ -146,8 +146,7 @@ public class ClientController {
         } catch (IOException e) {
             e.printStackTrace();
         }
-
-
+        getSavedContacts();
     }
 
     /**
@@ -166,6 +165,7 @@ public class ClientController {
                 userNames.add(user.getUsername());
             }
         } catch (IOException | ClassNotFoundException e) {
+            e.printStackTrace();
             System.out.println("No more objects to read");
         }
         return userNames;
