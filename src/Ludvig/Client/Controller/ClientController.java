@@ -134,7 +134,7 @@ public class ClientController {
      * @param username Received user object
      */
     public void saveContact(String username){
-        try(ObjectOutputStream output = new ObjectOutputStream(new FileOutputStream("files/contacts-" + username + ".bin", true))) {
+        try(ObjectOutputStream output = new ObjectOutputStream(new FileOutputStream("files/contacts-" + user.getUsername() + ".bin", true))) {
             for(User user : onlineContacts){
                 if(user.getUsername().equals(username)){
                     output.writeObject(user);
